@@ -1,0 +1,38 @@
+[core]
+	excludesfile = ~/.gitignore
+	editor = nvim
+	ignorecase = false
+[push]
+  default = simple
+  autoSetupRemote = true
+[pull]
+  rebase = true
+[color]
+  status = auto
+  diff = auto
+  branch = auto
+  interactive = auto
+  grep = auto
+  ui = auto
+[alias]
+  hist = log --pretty=format:\"%Cgreen%h %Creset%cd %Cblue[%cn] %Creset%s%C(yellow)%d%C(reset)\" --graph --date=relative --decorate --all
+
+[diff]
+  tool = nvimdiff
+[difftool "nvimdiff"]
+	cmd = nvim -d \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "nvimdiff"]
+	cmd = nvim -d \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+
+[includeIf "gitdir:~/workspace/"]
+        path = ~/.git-personal.conf
+[includeIf "gitdir:~/git/"]
+        path = ~/.git-work.conf
+[includeIf "gitdir:/tmp/secrets/"]
+        path = ~/.git-work.conf
+[includeIf "gitdir:/tmp/slask/"]
+        path = ~/.git-work.conf
+[credentials]
+	helper = credential-osxkeychain

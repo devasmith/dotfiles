@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+if [[ $2 != '' ]]; then
+	exit 0
+fi
+ISSUE=`git rev-parse --abbrev-ref HEAD | cut -d '/' -f 2`
+sed -i "1s/^/\n\nResolves: $ISSUE/" "$1"
+#sed -i '.bak' "1s/^/\n\nResolves: $ISSUE/" "$1"

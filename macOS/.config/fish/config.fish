@@ -8,7 +8,7 @@ if status is-interactive
   cd $HOME
 end
 
-set -gx EDITOR nvim
+set -gx EDITOR lvim
 
 set -gx PATH /opt/homebrew/bin $PATH
 set -gx PATH /opt/homebrew/opt/findutils/libexec/gnubin $PATH
@@ -25,11 +25,14 @@ alias la "ls -A"
 alias ll "ls -l"
 alias lla "ll -A"
 alias j "z"
-command -qv nvim && alias vim nvim
-alias vimdiff "nvim -d"
+command -qv lvim && alias vim lvim
+alias vimdiff "lvim -d"
 alias copy "pbcopy"
 alias week "date +%V"
 alias gox86 "GOOS=linux GOARCH=amd64 go"
+
+# source some other aliases that we don't include here
+source ~/.aliases
 
 function vps
         mosh irc
@@ -51,5 +54,4 @@ if status is-login
     ssh-add -q --apple-use-keychain --apple-load-keychain
 end
 
-kubectl completion fish | source
 stern --completion=fish | source

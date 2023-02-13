@@ -40,15 +40,33 @@ if [[ "$(dscl . -read ~/ UserShell | sed 's/UserShell: //')" != "$fish" ]]; then
     chsh -s "$fish"
 fi
 
-for file in .*; do
-    if [[ -f $file ]]; then
-        if [[ $file == .prepare-commit-msg ]]; then
+for i in .*; do
+    if [[ -d $i ]]; then
+      if [[ $i == .config ]]; then
+        for dir in "$i"/*; do
+          if [[ ! -d $HOME/$dir ]]; then
+            echo "Creating directory $HOME/$dir"
+            mkdir "$HOME/$dir" || echo "mkdir $dir failed."
+          fi
+
+          for config in "$dir"/*; do
+            if [[ ! -L $HOME/$config ]]; then
+              echo "Linking $config to $HOME/$config"
+              ln -s "$HOME/workspace/dotfiles/macOS/$config" "$HOME/$config"
+            fi
+          done
+        done
+      fi
+    fi
+
+    if [[ -f $i ]]; then
+        if [[ $i == .prepare-commit-msg ]]; then
             [[ -d ~/.githooks ]] || mkdir ~/.githooks
-            [[ -f ~/.githooks/prepare-commit-msg ]] || ln -s "$HOME/workspace/dotfiles/macOS/$file" "$HOME/.githooks/prepare-commit-msg"
-        elif [[ $file == .git-work.conf.gpg ]]; then
+            [[ -f ~/.githooks/prepare-commit-msg ]] || ln -s "$HOME/workspace/dotfiles/macOS/$i" "$HOME/.githooks/prepare-commit-msg"
+        elif [[ $i == .git-work.conf.gpg ]]; then
             [[ -f ~/.git-work.conf ]] || gpg -d -o ~/.git-work.conf .git-work.conf.gpg
         else
-            [[ -f $HOME/$file ]] || ln -s "$HOME/workspace/dotfiles/macOS/$file" "$HOME/$file"
+            [[ -f $HOME/$i ]] || ln -s "$HOME/workspace/dotfiles/macOS/$i" "$HOME/$i"
         fi
     fi
 done

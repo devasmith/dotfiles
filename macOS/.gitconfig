@@ -3,7 +3,7 @@
 	editor = nvim
 	ignorecase = false
 [push]
-  default = simple
+	default = current
   autoSetupRemote = true
 [pull]
   rebase = true

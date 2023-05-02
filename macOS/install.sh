@@ -21,7 +21,7 @@ $brew install --quiet fish fisher jq ipcalc iproute2mac neovim direnv pwgen \
     koekeishiya/formulae/yabai koekeishiya/formulae/skhd
 
 echo "Install brew cask packages"
-$brew install --quiet --cask 1password alfred appcleaner alt-tab brave-browser firefox iterm2 \
+$brew install --quiet --cask 1password alacritty alfred appcleaner alt-tab brave-browser firefox iterm2 \
     docker signal istat-menus obsidian gpg-suite-no-mail only-switch \
     visual-studio-code font-jetbrains-mono-nerd-font font-powerline-symbols \
     whichspace wireshark

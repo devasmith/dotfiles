@@ -10,7 +10,7 @@ an executable
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save.enabled = true
-lvim.colorscheme = "tokyonight"
+lvim.colorscheme = "dracula"
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
 
@@ -105,16 +105,19 @@ lvim.builtin.treesitter.highlight.enable = true
 -- ---@usage disable automatic installation of servers
 -- lvim.lsp.installer.setup.automatic_installation = false
 
--- ---configure a server manually. !!Requires `:LvimCacheReset` to take effect!!
--- ---see the full default list `:lua print(vim.inspect(lvim.lsp.automatic_configuration.skipped_servers))`
--- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
+---configure a server manually. !!Requires `:LvimCacheReset` to take effect!!
+---see the full default list `:lua print(vim.inspect(lvim.lsp.automatic_configuration.skipped_servers))`
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
 -- local opts = {} -- check the lspconfig documentation for a list of all possible options
 -- require("lvim.lsp.manager").setup("pyright", opts)
 local opts = {
   settings = {
     ansible = {
       python = {
-        interpreterPath = "~/.venv/ansible/bin/python"
+        interpreterPath = "~/.venv/ansible/bin/python3"
+      },
+      ansible = {
+        path = "~/.venv/ansible/bin/ansible"
       },
       validation = {
         lint = {
@@ -182,12 +185,6 @@ vim.cmd 'autocmd BufRead,BufNewFile *.libsonnet set filetype=jsonnet'
 -- }
 
 -- Additional Plugins
--- lvim.plugins = {
---   {
---     "folke/trouble.nvim",
---     cmd = "TroubleToggle",
---   },
--- }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- vim.api.nvim_create_autocmd("BufEnter", {

@@ -16,6 +16,7 @@ set -gx PATH /opt/homebrew/opt/grep/libexec/gnubin $PATH
 set -gx PATH /opt/homebrew/opt/gnu-sed/libexec/gnubin $PATH
 set -gx PATH ~/.local/bin $PATH
 set -gx PATH ~/go/bin $PATH
+set -gx GOPATH $HOME/go
 
 direnv hook fish | source
 

@@ -16,7 +16,7 @@ elif [[ -x /opt/homebrew/bin/brew ]]; then
 fi
 
 echo "Install brew packages"
-$brew install --quiet fish fisher jq ipcalc iproute2mac neovim direnv pwgen \
+$brew install --quiet ncdu fish fisher jq ipcalc iproute2mac neovim direnv pwgen \
     git fzf grep bash curl k9s mosh tmux tmux-xpanes node findutils gnu-sed \
     koekeishiya/formulae/yabai koekeishiya/formulae/skhd
 

@@ -17,6 +17,7 @@ set -gx PATH /opt/homebrew/opt/gnu-sed/libexec/gnubin $PATH
 set -gx PATH ~/.local/bin $PATH
 set -gx PATH ~/go/bin $PATH
 set -gx GOPATH $HOME/go
+set -gx K9S_CONFIG_DIR $HOME/.config/k9s
 
 direnv hook fish | source
 

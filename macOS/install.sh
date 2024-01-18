@@ -16,12 +16,12 @@ elif [[ -x /opt/homebrew/bin/brew ]]; then
 fi
 
 echo "Install brew packages"
-$brew install --quiet ncdu fish fisher jq ipcalc iproute2mac neovim direnv pwgen \
+$brew install --quiet stern ncdu fish fisher jq ipcalc iproute2mac neovim direnv pwgen \
     git fzf grep bash curl k9s mosh tmux tmux-xpanes node findutils gnu-sed \
     koekeishiya/formulae/yabai koekeishiya/formulae/skhd
 
 echo "Install brew cask packages"
-$brew install --quiet --cask 1password alacritty alfred appcleaner alt-tab brave-browser firefox iterm2 \
+$brew install --quiet --cask tomatobar 1password alacritty alfred appcleaner alt-tab brave-browser firefox iterm2 \
     docker signal istat-menus obsidian gpg-suite-no-mail only-switch \
     visual-studio-code font-jetbrains-mono-nerd-font font-powerline-symbols \
     whichspace wireshark

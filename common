@@ -1,0 +1,7 @@
+#!/bin/bash
+set -e
+
+# common stuff between install/update
+
+echo "install/update jsonnet-language-server"
+go install github.com/grafana/jsonnet-language-server@latest

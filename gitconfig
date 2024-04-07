@@ -51,7 +51,7 @@
 [diff]
     colorMoved = default
 
-[includeIf "gitdir:~/workspace/"]
+[includeIf "gitdir:~/git/workspace/"]
         path = ~/.git-personal.conf
 [includeIf "gitdir:~/git/dotfiles/"]
         path = ~/.git-personal.conf

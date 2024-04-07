@@ -28,8 +28,12 @@ i(){
 	sudo pacman --noconfirm -S --needed "$@"
 }
 
-#echo "Git pull"
-#git pull --autostash
+echo "Upgrade system and install git"
+sudo dnf upgrade -y
+sudo dnf install git -y
+
+echo "Git pull"
+git pull --autostash
 
 [[ -d ~/bin ]] || mkdir -p ~/bin
 [[ -d ~/Screenshots ]] || mkdir -p ~/Screenshots

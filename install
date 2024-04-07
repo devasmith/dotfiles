@@ -103,6 +103,7 @@ if [ ! -d ~/.fzf ]; then
 	~/.fzf/install --all
 fi
 
+lnk "update" "bin/update"
 lnk "jshintrc" ".jshintrc"
 lnk "lockFuzzy" "bin/lockFuzzy"
 lnk "dir_colors" ".dir_colors"

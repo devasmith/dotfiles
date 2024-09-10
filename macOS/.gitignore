@@ -1,7 +1,0 @@
-galaxy-roles/
-fetch/
-*.retry
-.vagrant
-*.pyc
-*.swp
-.vscode

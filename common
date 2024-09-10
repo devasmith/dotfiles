@@ -1,8 +1,0 @@
-#!/bin/bash
-set -e
-
-# common stuff between install/update
-
-echo "install/update go packages"
-go install github.com/grafana/jsonnet-language-server@latest
-go install github.com/stern/stern@latest

@@ -1,0 +1,33 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+
+brew bundle --no-lock --file=/dev/stdin <<EOF
+tap "homebrew/bundle"
+
+brew "git"
+brew "coreutils"
+brew "stern"
+brew "ncdu"
+brew "jq"
+brew "ipcalc"
+brew "iproute2mac"
+brew "neovim"
+brew "direnv"
+brew "fzf"
+brew "k9s"
+brew "mosh"
+brew "tmux"
+brew "koekeishiya/formulae/yabai"
+brew "koekeishiya/formulae/skhd"
+
+cask "1password"
+cask "alacritty"
+cask "alfred"
+cask "alt-tab"
+cask "brave-browser"
+cask "firefox"
+cask "visual-studio-code"
+cask "font-jetbrains-mono-nerd-font"
+cask "font-powerline-symbols"
+EOF
+{{ end -}}

@@ -17,11 +17,14 @@ brew "ipcalc"
 brew "iproute2mac"
 brew "neovim"
 brew "direnv"
+brew "fd"
 brew "fzf"
 brew "fish"
 brew "k9s"
 brew "tmux"
 brew "mosh"
+brew "ripgrep"
+brew "git-delta"
 brew "koekeishiya/formulae/yabai"
 brew "koekeishiya/formulae/skhd"
 
@@ -45,7 +48,7 @@ fi
 
 echo "Install/upgrade fisher plugins"
 fish="/opt/homebrew/bin/fish"
-fisher_packages="jethrokuan/z IlanCosman/tide@v5 jethrokuan/fzf jhillyerd/plugin-git"
+fisher_packages="jethrokuan/z IlanCosman/tide@v6 jethrokuan/fzf jhillyerd/plugin-git meaningful-ooo/sponge dracula/fish"
 for package in $fisher_packages; do
     if ! $fish -c "fisher list | grep -q -i $package"; then
         $fish -c "fisher install $package"

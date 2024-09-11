@@ -4,8 +4,12 @@
 brew bundle --no-lock --file=/dev/stdin <<EOF
 tap "homebrew/bundle"
 
+brew "atuin"
+brew "age"
 brew "git"
+brew "bat"
 brew "coreutils"
+brew "curl"
 brew "stern"
 brew "ncdu"
 brew "jq"
@@ -14,20 +18,39 @@ brew "iproute2mac"
 brew "neovim"
 brew "direnv"
 brew "fzf"
+brew "fish"
 brew "k9s"
-brew "mosh"
 brew "tmux"
+brew "mosh"
 brew "koekeishiya/formulae/yabai"
 brew "koekeishiya/formulae/skhd"
 
 cask "1password"
+cask "1password-cli"
 cask "alacritty"
 cask "alfred"
 cask "alt-tab"
 cask "brave-browser"
 cask "firefox"
-cask "visual-studio-code"
 cask "font-jetbrains-mono-nerd-font"
 cask "font-powerline-symbols"
+cask "visual-studio-code"
 EOF
+
+fish="/opt/homebrew/bin/fish"
+if [[ ! -f "$HOME/.config/fish/completions/fisher.fish" ]]; then
+  $fish -c 'curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source'
+  $fish -c 'fisher install jorgebucaran/fisher'
+fi
+
+echo "Install/upgrade fisher plugins"
+fish="/opt/homebrew/bin/fish"
+fisher_packages="jethrokuan/z IlanCosman/tide@v5 jethrokuan/fzf jhillyerd/plugin-git"
+for package in $fisher_packages; do
+    if ! $fish -c "fisher list | grep -q -i $package"; then
+        $fish -c "fisher install $package"
+    else
+    	$fish -c "fisher update $package"
+    fi
+done
 {{ end -}}

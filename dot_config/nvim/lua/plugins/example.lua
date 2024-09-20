@@ -121,9 +121,10 @@ return {
     opts = {
       ensure_installed = {
         "bash",
-        "html",
+        "go",
         "javascript",
         "json",
+        "jsonnet",
         "lua",
         "markdown",
         "markdown_inline",

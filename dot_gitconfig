@@ -1,49 +1,54 @@
 [push]
-	default = simple
-	autoSetupRemote = true
+  default = simple
+  autoSetupRemote = true
 [core]
-	excludesfile = ~/.gitignore
-	pager = delta
+  excludesfile = ~/.gitignore
+  pager = delta
+  editor = code --wait
 [credential]
 	helper = cache --timeout 3600
 [alias]
-	create-pull-request = !sh -c 'stash pull-request $0'
-	pr = !sh -c 'stash-browse -p $0'
-	lg1 = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
-	lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
-	lg = !"git lg1"
-	lg3 = log --pretty=format:"%h%x09%an%x09%ad%x09%s"
-	meld = "!f() { git difftool -d  $1 $2; }; f"
-	st = status
-	ci = commit
-	co = checkout
-	p = pull
-	trackpush = "!git push --set-upstream origin `git symbolic-ref --short HEAD`"
-	sync = "!git pull && sync_server"
-	rb = "!f() { git fetch origin \"$1\" && git rebase FETCH_HEAD;}; f"
+  create-pull-request = !sh -c 'stash pull-request $0'
+  pr = !sh -c 'stash-browse -p $0'
+  lg1 = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+  lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+  lg = !"git lg1"
+  lg3 = log --pretty=format:"%h%x09%an%x09%ad%x09%s"
+  meld = "!f() { git difftool -d  $1 $2; }; f"
+  st = status
+  ci = commit
+  co = checkout
+  p = pull
+  trackpush = "!git push --set-upstream origin `git symbolic-ref --short HEAD`"
+  sync = "!git pull && sync_server"
+  rb = "!f() { git fetch origin \"$1\" && git rebase FETCH_HEAD;}; f"
 [pull]
-	rebase = true
+  rebase = true
 [interactive]
-    diffFilter = delta --color-only
+  diffFilter = delta --color-only
 [delta]
-    features = side-by-side line-numbers decorations
-    syntax-theme = Dracula
-    plus-style = syntax "#003800"
-    minus-style = syntax "#3f0001"
+  features = side-by-side line-numbers decorations
+  syntax-theme = Dracula
+  plus-style = syntax "#003800"
+  minus-style = syntax "#3f0001"
 [delta "decorations"]
-    commit-decoration-style = bold yellow box ul
-    file-style = bold yellow ul
-    file-decoration-style = none
-    hunk-header-decoration-style = cyan box ul
+  commit-decoration-style = bold yellow box ul
+  file-style = bold yellow ul
+  file-decoration-style = none
+  hunk-header-decoration-style = cyan box ul
 [delta "line-numbers"]
-    line-numbers-left-style = cyan
-    line-numbers-right-style = cyan
-    line-numbers-minus-style = 124
-    line-numbers-plus-style = 28
-[merge]
-    conflictstyle = diff3
+  line-numbers-left-style = cyan
+  line-numbers-right-style = cyan
+  line-numbers-minus-style = 124
+  line-numbers-plus-style = 28
 [diff]
-    colorMoved = default
+  tool = vscode
+[difftool "vscode"]
+  cmd = code --wait --diff $LOCAL $REMOTE
+[merge]
+  tool = vscode
+[mergetool "vscode"]
+  cmd = code --wait $MERGED
 [color]
   ui = auto
 [color "branch"]
@@ -84,8 +89,8 @@
   untracked = red
   updated = green bold
 [includeIf "gitdir:~/git/workspace/"]
-        path = ~/.git-personal.conf
+  path = ~/.git-personal.conf
 [includeIf "gitdir:~/.local/share/chezmoi/"]
-        path = ~/.git-personal.conf
+  path = ~/.git-personal.conf
 [includeIf "gitdir:~/git/"]
-        path = ~/.git-work.conf
+  path = ~/.git-work.conf

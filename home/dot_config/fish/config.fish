@@ -10,8 +10,6 @@ if status is-interactive
 end
 
 set -x PATH /usr/local/bin ~/.local/bin /opt/homebrew/bin ~/go/bin $PATH
-set -gx PATH /opt/homebrew/opt/findutils/libexec/gnubin $PATH
-set -gx PATH /opt/homebrew/opt/grep/libexec/gnubin $PATH
 set -gx PATH /opt/homebrew/opt/gnu-sed/libexec/gnubin $PATH
 set -gx PATH /opt/homebrew/opt/gnu-tar/libexec/gnubin $PATH
 set -gx EDITOR nvim
@@ -24,6 +22,7 @@ command -qv bat && alias cat bat
 command -qv nvim && alias vim nvim
 command -qv rg && alias grep rg
 command -qv fd && alias find fd
+command -qv lazygit && alias lgit lazygit
 
 alias ls "ls -p -G"
 alias la "ls -A"

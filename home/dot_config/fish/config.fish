@@ -44,6 +44,13 @@ function vps
     mosh irc
 end
 
+set -g fish_escape_delay_ms 300
+function fish_user_key_bindings
+    bind \e. history-token-search-backward
+end
+
+{{ if ne .chezmoi.os "darwin" }}
+
 function upgrade
     brew update
     brew outdated
@@ -53,14 +60,11 @@ function upgrade
     softwareupdate -i -a
 end
 
-set -g fish_escape_delay_ms 300
-function fish_user_key_bindings
-    bind \e. history-token-search-backward
-end
-
 if status is-login
     ssh-add -q --apple-use-keychain --apple-load-keychain
 end
+
+{{ end }}
 
 stern --completion=fish | source
 atuin init fish | source

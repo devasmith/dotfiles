@@ -1,0 +1,37 @@
+{{- if eq .chezmoi.os "linux" -}}
+#!/bin/bash
+mkdir -p $HOME/.local/bin
+
+sudo apt install -y $(cat <<EOF
+bat
+code
+git
+htop
+ipcalc
+jq
+ncdu
+direnv
+fzf
+fish
+tmux
+mosh
+lastpass-cli
+EOF
+)
+
+fish="/usr/bin/fish"
+if [[ ! -f "$HOME/.config/fish/completions/fisher.fish" ]]; then
+  $fish -c 'curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source'
+  $fish -c 'fisher install jorgebucaran/fisher'
+fi
+
+echo "Install/upgrade fisher plugins"
+fisher_packages="jethrokuan/z IlanCosman/tide@v6 jethrokuan/fzf jhillyerd/plugin-git meaningful-ooo/sponge dracula/fish"
+for package in $fisher_packages; do
+    if ! $fish -c "fisher list | grep -q -i $package"; then
+      $fish -c "fisher install $package"
+    else
+    	$fish -c "fisher update $package"
+    fi
+done
+{{ end -}}

@@ -3,6 +3,8 @@
 mkdir -p $HOME/.local/bin
 
 sudo apt install -y $(cat <<EOF
+i3
+i3status
 bat
 code
 git
@@ -21,8 +23,7 @@ EOF
 
 fish="/usr/bin/fish"
 if [[ ! -f "$HOME/.config/fish/completions/fisher.fish" ]]; then
-  $fish -c 'curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source'
-  $fish -c 'fisher install jorgebucaran/fisher'
+  $fish -c 'curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher'
 fi
 
 echo "Install/upgrade fisher plugins"
@@ -34,4 +35,5 @@ for package in $fisher_packages; do
     	$fish -c "fisher update $package"
     fi
 done
+
 {{ end -}}

@@ -49,7 +49,7 @@ function fish_user_key_bindings
     bind \e. history-token-search-backward
 end
 
-{{ if ne .chezmoi.os "darwin" }}
+{{ if eq .chezmoi.os "darwin" }}
 
 function upgrade
     brew update
@@ -66,5 +66,5 @@ end
 
 {{ end }}
 
-stern --completion=fish | source
-atuin init fish | source
+command -qv && stern --completion=fish | source
+command -qv && atuin init fish | source

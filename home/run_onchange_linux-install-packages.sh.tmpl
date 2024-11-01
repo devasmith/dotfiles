@@ -5,14 +5,18 @@ mkdir -p $HOME/.local/bin
 sudo apt install -y $(cat <<EOF
 i3
 i3status
+xautolock
 bat
 code
 git
 htop
 ipcalc
 jq
+tcpdump
 ncdu
 direnv
+brightnessctl
+arandr
 fzf
 fish
 tmux
@@ -27,12 +31,12 @@ if [[ ! -f "$HOME/.config/fish/completions/fisher.fish" ]]; then
 fi
 
 echo "Install/upgrade fisher plugins"
-fisher_packages="jethrokuan/z IlanCosman/tide@v6 jethrokuan/fzf jhillyerd/plugin-git meaningful-ooo/sponge dracula/fish"
+fisher_packages="jethrokuan/z IlanCosman/tide@v6 jethrokuan/fzf jhillyerd/plugin-git meaningful-ooo/sponge dracula/fish edc/bass"
 for package in $fisher_packages; do
     if ! $fish -c "fisher list | grep -q -i $package"; then
       $fish -c "fisher install $package"
     else
-    	$fish -c "fisher update $package"
+      $fish -c "fisher update $package"
     fi
 done
 

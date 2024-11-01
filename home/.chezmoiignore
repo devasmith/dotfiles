@@ -3,4 +3,8 @@ git
 .config/sketchybar
 .config/skhd
 .config/yabai
+{{ else if ne .chezmoi.os "linux" }}
+.config/i3
+.config/i3status
+.config/rofi
 {{- end }}

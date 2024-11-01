@@ -60,7 +60,7 @@ cursor = "CellForeground"
 text = "CellBackground"
 
 [font]
-size = 20
+size = 10
 
 [font.bold]
 family = "JetBrainsMono Nerd Font"

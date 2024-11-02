@@ -7,4 +7,8 @@ git
 .config/i3
 .config/i3status
 .config/rofi
+.config/clipcat
+.local/bin
+.screenlayout
+.profile
 {{- end }}

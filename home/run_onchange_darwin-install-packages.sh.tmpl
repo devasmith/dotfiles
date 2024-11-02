@@ -10,7 +10,6 @@ brew "bat"
 brew "coreutils"
 brew "curl"
 brew "htop"
-brew "taskwarrior-tui"
 brew "httpie"
 brew "glow"
 brew "lazygit"
@@ -56,7 +55,7 @@ fish="/opt/homebrew/bin/fish"
 fisher_packages="jethrokuan/z IlanCosman/tide@v6 jethrokuan/fzf jhillyerd/plugin-git meaningful-ooo/sponge dracula/fish"
 for package in $fisher_packages; do
     if ! $fish -c "fisher list | grep -q -i $package"; then
-        $fish -c "fisher install $package"
+      $fish -c "fisher install $package"
     else
     	$fish -c "fisher update $package"
     fi

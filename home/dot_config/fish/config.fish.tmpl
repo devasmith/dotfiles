@@ -9,20 +9,11 @@ if status is-interactive
     cd $HOME
 end
 
-set -x PATH /usr/local/bin ~/.local/bin /opt/homebrew/bin ~/go/bin $PATH
-set -gx PATH /opt/homebrew/opt/gnu-sed/libexec/gnubin $PATH
-set -gx PATH /opt/homebrew/opt/gnu-tar/libexec/gnubin $PATH
 set -gx EDITOR nvim
 set -gx GOPATH $HOME/go
 set -gx K9S_CONFIG_DIR $HOME/.config/k9s
 
 direnv hook fish | source
-
-command -qv bat && alias cat bat
-command -qv nvim && alias vim nvim
-command -qv rg && alias grep rg
-command -qv fd && alias find fd
-command -qv lazygit && alias lgit lazygit
 
 alias ls "ls -p -G"
 alias la "ls -A"
@@ -32,7 +23,6 @@ alias j z
 alias vimdiff "nvim -d"
 alias copy pbcopy
 alias week "date +%V"
-alias gox86 "GOOS=linux GOARCH=amd64 go"
 alias k kubectl
 alias kc "kubectl config use-context"
 alias ku "kubectl config unset current-context"
@@ -49,6 +39,14 @@ function fish_user_key_bindings
     bind \e. history-token-search-backward
 end
 
+command -qv bat && alias cat bat
+command -qv nvim && alias vim nvim
+command -qv rg && alias grep rg
+command -qv fd && alias find fd
+command -qv lazygit && alias lgit lazygit
+command -qv stern && stern --completion=fish | source
+command -qv atuin && atuin init fish | source
+
 {{ if eq .chezmoi.os "darwin" }}
 
 function upgrade
@@ -64,9 +62,15 @@ if status is-login
     ssh-add -q --apple-use-keychain --apple-load-keychain
 end
 
-{{ end }}
+set -x PATH /usr/local/bin ~/.local/bin /opt/homebrew/bin ~/go/bin $PATH
+set -gx PATH /opt/homebrew/opt/gnu-sed/libexec/gnubin $PATH
+set -gx PATH /opt/homebrew/opt/gnu-tar/libexec/gnubin $PATH
 
+{{ else if eq .chezmoi.os "linux" }}
+
+set -x PATH /usr/local/bin ~/.local/bin ~/go/bin $PATH
 bass source ~/.profile
 
-command -qv && stern --completion=fish | source
-command -qv && atuin init fish | source
+{{ end }}
+
+direnv hook fish | source

@@ -40,6 +40,9 @@ exec --no-startup-id nm-applet
 # Volumeicon
 exec --no-startup-id volumeicon
 
+# Blueman tray
+exec --no-startup-id blueman-applet
+
 # Brightness
 # Allow without sudo: `sudo usermod -aG video {$USER} && reboot`
 bindsym XF86MonBrightnessDown exec brightnessctl s 5%-

@@ -39,14 +39,6 @@ function fish_user_key_bindings
     bind \e. history-token-search-backward
 end
 
-command -qv bat && alias cat bat
-command -qv nvim && alias vim nvim
-command -qv rg && alias grep rg
-command -qv fd && alias find fd
-command -qv lazygit && alias lgit lazygit
-command -qv stern && stern --completion=fish | source
-command -qv atuin && atuin init fish | source
-
 {{ if eq .chezmoi.os "darwin" }}
 
 function upgrade
@@ -68,9 +60,17 @@ set -gx PATH /opt/homebrew/opt/gnu-tar/libexec/gnubin $PATH
 
 {{ else if eq .chezmoi.os "linux" }}
 
-set -x PATH /usr/local/bin ~/.local/bin ~/go/bin $PATH
+set -x PATH /usr/local/bin ~/.local/bin /home/linuxbrew/.linuxbrew/bin ~/go/bin $PATH
 bass source ~/.profile
 
 {{ end }}
+
+command -qv bat && alias cat bat
+command -qv nvim && alias vim nvim
+command -qv rg && alias grep rg
+command -qv fd && alias find fd
+command -qv lazygit && alias lgit lazygit
+command -qv stern && stern --completion=fish | source
+command -qv atuin && atuin init fish | source
 
 direnv hook fish | source

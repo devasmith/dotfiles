@@ -24,7 +24,6 @@ order += "load"
 order += "cpu_temperature 0"
 order += "memory"
 order += "tztime local"
-order += "volume_master"
 
 wireless _first_ {
         format_up = "W: (%quality at %essid) %ip"
@@ -74,11 +73,4 @@ memory {
 
 tztime local {
         format = "%Y-%m-%d %H:%M:%S"
-}
-
-volume master {
-format = "♪:%volume"
-device = "default"
-mixer = "Master"
-mixer_idx = 0
 }

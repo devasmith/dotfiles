@@ -37,6 +37,9 @@ exec "xautolock -detectsleep -time 10 -locker \"i3lock -c 000000\""
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
+# Volumeicon
+exec --no-startup-id volumeicon
+
 # Brightness
 # Allow without sudo: `sudo usermod -aG video {$USER} && reboot`
 bindsym XF86MonBrightnessDown exec brightnessctl s 5%-
@@ -50,7 +53,7 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # Clipcat
-exec_always --no-startup-id clipcatd
+exec_always --no-startup-id clipcatd    # start clipcatd at startup
 
 set $launcher-clipboard-insert clipcat-menu --finder rofi insert --kinds primary --kinds clipboard
 set $launcher-clipboard-remove clipcat-menu --finder rofi remove
@@ -131,6 +134,12 @@ bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
+
+# Make the currently focused window a scratchpad
+bindsym $mod+Shift+z move scratchpad
+
+# Show the first scratchpad window
+bindsym $mod+z scratchpad show
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.

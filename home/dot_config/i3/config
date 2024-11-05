@@ -56,8 +56,6 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # Clipcat
-exec_always --no-startup-id clipcatd --replace    # start clipcatd at startup
-
 set $launcher-clipboard-insert clipcat-menu --finder rofi insert --kinds primary --kinds clipboard
 set $launcher-clipboard-remove clipcat-menu --finder rofi remove
 

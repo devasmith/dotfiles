@@ -8,6 +8,7 @@ git
 .config/i3status
 .config/rofi
 .config/clipcat
+.config/systemd
 .local/bin
 .screenlayout
 .profile

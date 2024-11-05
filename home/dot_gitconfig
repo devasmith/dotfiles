@@ -4,7 +4,6 @@
 [core]
   excludesfile = ~/.gitignore
   pager = delta
-  editor = code --wait
 [credential]
 	helper = cache --timeout 3600
 [alias]

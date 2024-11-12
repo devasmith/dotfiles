@@ -5,7 +5,6 @@ preview_length = 80
 line_length = 100
 menu_length = 30
 menu_prompt = "Clipcat"
-extra_arguments = ["-mesg", "Please select a clip"]
 
 [dmenu]
 line_length = 100

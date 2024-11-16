@@ -26,6 +26,17 @@ brew "sops"
 brew "tree-sitter"
 EOF
 
+# Snap
+## classic
+while read package; do
+    sudo snap install --classic "$package"
+done <<EOF
+alacritty
+go
+EOF
+
+# APT
+
 sudo apt install -y $(cat <<EOF
 i3
 i3status
@@ -40,6 +51,7 @@ playerctl
 lxappearance
 ipcalc
 jq
+scrot
 tcpdump
 ncdu
 direnv

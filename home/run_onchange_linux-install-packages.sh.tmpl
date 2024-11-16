@@ -2,6 +2,30 @@
 #!/bin/bash
 mkdir -p $HOME/.local/bin
 
+# Install Homebrew
+# https://brew.sh/
+if command -v brew; then
+    brew update
+else
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+# Install brew packages
+brew bundle --no-lock --file=/dev/stdin <<EOF
+brew "ali"
+brew "atuin"
+brew "fd"
+brew "k9s"
+brew "neovim"
+brew "thefuck"
+brew "yaml-language-server"
+brew "git-delta"
+brew "fd"
+brew "ripgrep"
+brew "sops"
+brew "tree-sitter"
+EOF
+
 sudo apt install -y $(cat <<EOF
 i3
 i3status
@@ -23,6 +47,7 @@ brightnessctl
 arandr
 autorandr
 build-essential
+shellcheck
 fzf
 fish
 tmux

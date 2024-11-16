@@ -1,7 +1,7 @@
 daemonize = true
 primary_threshold_ms = 5000
 max_history = 10000
-synchronize_selection_with_clipboard = false
+synchronize_selection_with_clipboard = true
 history_file_path = "~/.cache/clipcatd-history"
 
 [log]
@@ -12,11 +12,11 @@ level = "warn"
 
 [watcher]
 enable_clipboard = true
-enable_primary = false
+enable_primary = true
 sensitive_x11_atoms = ["x-kde-passwordManagerHint"]
 filter_text_min_length = 1
 filter_text_max_length = 20000000
-denied_text_regex_patterns = []
+denied_text_regex_patterns = ["^%MCEPASTEBIN%$"]
 capture_image = true
 filter_image_max_size = 5242880
 

@@ -13,7 +13,7 @@ off
 output DisplayPort-7
 off
 output DisplayPort-1
-crtc 2
+crtc 1
 mode 2560x1440
 pos 0x0
 rate 59.95
@@ -27,10 +27,10 @@ x-prop-underscan off
 x-prop-underscan_hborder 0
 x-prop-underscan_vborder 0
 output DisplayPort-0
-crtc 1
+crtc 2
 mode 3840x2160
 pos 1440x0
-rate 120.00
+rate 120.02
 x-prop-colorspace Default
 x-prop-max_bpc 16
 x-prop-non_desktop 0
@@ -42,7 +42,7 @@ x-prop-underscan_vborder 0
 output eDP
 crtc 0
 mode 1920x1200
-pos 2184x2160
+pos 2400x2160
 primary
 rate 60.00
 x-prop-colorspace Default

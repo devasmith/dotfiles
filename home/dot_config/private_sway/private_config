@@ -281,7 +281,7 @@ exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=pkcs11,s
 # Copyq
 bindsym $mod+p exec --no-startup-id copyq show clipboard
 bindsym $mod+Shift+p exec --no-startup-id copyq show Snippets
-for_window [class="copyq"] floating enable, resize set 1000 600, border pixel 5, mouse_warping none
+for_window [app_id="com.github.hluk.copyq"] floating enable, resize set 800 600
 exec copyq
 
 # auto start applications

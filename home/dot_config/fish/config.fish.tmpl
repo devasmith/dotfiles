@@ -7,6 +7,15 @@ set -gx TERM xterm-256color
 
 if status is-interactive
     cd $HOME
+    command -qv bat && alias cat bat
+    command -qv nvim && alias vim nvim
+    command -qv rg && alias grep rg
+    command -qv fd && alias find fd
+    command -qv lazygit && alias lgit lazygit
+    command -qv stern && stern --completion=fish | source
+    command -qv atuin && atuin init fish | source
+    command -qv flux && flux completion fish | source
+    command -qv kubectl && kubectl completion fish | source
 end
 
 set -gx EDITOR nvim
@@ -21,7 +30,7 @@ alias ll "ls -l"
 alias lla "ll -A"
 alias j z
 alias vimdiff "nvim -d"
-alias copy pbcopy
+alias copy wl-copy
 alias week "date +%V"
 alias k kubectl
 alias kc "kubectl config use-context"
@@ -64,15 +73,5 @@ set -x PATH /usr/local/bin ~/.local/bin /home/linuxbrew/.linuxbrew/bin ~/go/bin 
 bass source ~/.profile
 
 {{ end }}
-
-command -qv bat && alias cat bat
-command -qv nvim && alias vim nvim
-command -qv rg && alias grep rg
-command -qv fd && alias find fd
-command -qv lazygit && alias lgit lazygit
-command -qv stern && stern --completion=fish | source
-command -qv atuin && atuin init fish | source
-command -qv flux && flux completion fish | source
-command -qv kubectl && kubectl completion fish | source
 
 direnv hook fish | source

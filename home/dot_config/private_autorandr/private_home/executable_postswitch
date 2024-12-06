@@ -1,5 +1,0 @@
-#!/bin/bash
-i3-msg '[workspace="^(1|2|3)"] move workspace to output DisplayPort-0'
-i3-msg "workspace 4; move workspace to output DisplayPort-1"
-i3-msg "restart"
-xset s off -dpms && notify-send "Disabled DPMS"

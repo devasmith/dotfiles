@@ -4,7 +4,8 @@ git
 .config/skhd
 .config/yabai
 {{ else if ne .chezmoi.os "linux" }}
-.config/i3
+.config/sway
+.config/kanshi
 .config/i3status
 .config/rofi
 .config/clipcat

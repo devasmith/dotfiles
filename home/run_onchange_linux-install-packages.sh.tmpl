@@ -38,18 +38,24 @@ EOF
 
 # APT
 
+sudo add-apt-repository ppa:hluk/copyq -y
+sudo apt update
+
 sudo apt install -y $(cat <<EOF
-i3
-i3status
-xautolock
+sway
+swaylock
+grimshot
+wdisplays
+wofi
+kanshi
 bat
 code
+copyq
 xclip
 git
 htop
 imagemagick
 pulseaudio-utils
-rofi
 volumeicon-alsa
 blueman
 playerctl
@@ -61,8 +67,6 @@ tcpdump
 ncdu
 direnv
 brightnessctl
-arandr
-autorandr
 build-essential
 shellcheck
 fzf

@@ -221,23 +221,42 @@ bindsym $mod+r mode "resize"
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
-    position top
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %X'; do sleep 1; done
-#    status_command i3status
+  status_command i3status
+  position top
+  output eDP-1
+  tray_output eDP-1
+  separator_symbol "|"
+  colors {
+    background #282A36
+    statusline #F8F8F2
+    separator  #44475A
 
-    colors {
-        background #282A36
-        statusline #F8F8F2
-        separator  #44475A
+    focused_workspace  #44475A #44475A #F8F8F2
+    active_workspace   #282A36 #44475A #F8F8F2
+    inactive_workspace #282A36 #282A36 #BFBFBF
+    urgent_workspace   #FF5555 #FF5555 #F8F8F2
+    binding_mode       #FF5555 #FF5555 #F8F8F2
+  }
+}
 
-        focused_workspace  #44475A #44475A #F8F8F2
-        active_workspace   #282A36 #44475A #F8F8F2
-        inactive_workspace #282A36 #282A36 #BFBFBF
-        urgent_workspace   #FF5555 #FF5555 #F8F8F2
-        binding_mode       #FF5555 #FF5555 #F8F8F2
-    }
+bar {
+  position top
+  output "GIGA-BYTE TECHNOLOGY CO., LTD. Gigabyte M32U 23091B000665"
+  output "Lenovo Group Limited P24h-2L V308P34K"
+  tray_output eDP-1
+  separator_symbol "|"
+  status_command i3status -c ~/.config/i3status/other-outputs.conf
+  colors {
+    background #282A36
+    statusline #F8F8F2
+    separator  #44475A
+
+    focused_workspace  #44475A #44475A #F8F8F2
+    active_workspace   #282A36 #44475A #F8F8F2
+    inactive_workspace #282A36 #282A36 #BFBFBF
+    urgent_workspace   #FF5555 #FF5555 #F8F8F2
+    binding_mode       #FF5555 #FF5555 #F8F8F2
+  }
 }
 
 #
@@ -249,10 +268,6 @@ bindsym --release Print exec --no-startup-id grimshot savecopy anything
 
 # Kanshi
 exec_always pkill kanshi; exec kanshi
-
-# NetworkManager is the most popular way to manage wireless networks on Linux,
-# and nm-applet is a desktop environment-independent system tray GUI for it.
-exec --no-startup-id nm-applet
 
 # Volumeicon
 exec --no-startup-id volumeicon
@@ -266,7 +281,6 @@ exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=pkcs11,s
 # Copyq
 bindsym $mod+p exec --no-startup-id copyq show clipboard
 bindsym $mod+Shift+p exec --no-startup-id copyq show Snippets
-#for_window [class="copyq"] floating enable, resize set 1000 600, border pixel 5, move container to output primary, mouse_warping none
 for_window [class="copyq"] floating enable, resize set 1000 600, border pixel 5, mouse_warping none
 exec copyq
 

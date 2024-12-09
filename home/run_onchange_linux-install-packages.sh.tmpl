@@ -44,9 +44,11 @@ sudo apt update
 sudo apt install -y $(cat <<EOF
 sway
 swaylock
+swayidle
 grimshot
 wdisplays
 wofi
+wob
 kanshi
 xdg-desktop-portal-wlr
 bat
@@ -77,6 +79,11 @@ mosh
 lastpass-cli
 EOF
 )
+
+# systemd services
+systemctl daemon-reload --user
+systemctl enable --now --user gnome-keyring-daemon 
+systemctl enable --now --user lid-suspend
 
 fish="/usr/bin/fish"
 if [[ ! -f "$HOME/.config/fish/completions/fisher.fish" ]]; then

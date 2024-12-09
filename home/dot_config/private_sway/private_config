@@ -46,12 +46,15 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
 exec swayidle -w \
-         timeout 300 'swaylock -f -c 000000' \
+         timeout 300 '~/.local/bin/lockscreen.sh' \
          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-         before-sleep 'swaylock -f -c 000000'
+         before-sleep '~/.local/bin/lockscreen.sh'
 
-# Lock screen
-bindsym Control+$mod+l exec --no-startup-id swaylock -f -c 000000
+# Clamshell mode or lock & sleep
+bindswitch --reload --locked lid:on exec ~/.local/bin/lockscreen.sh
+
+# Lock the screen with a blurred screenshot
+bindsym Control+$mod+l exec --no-startup-id ~/.local/bin/lockscreen.sh
 
 ### Input configuration
 #
@@ -269,14 +272,8 @@ bindsym --release Print exec --no-startup-id grimshot savecopy anything
 # Set XDG_CURRENT_DESKTOP
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
-# Start gnome-keyring
-exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh
-
 # Kanshi
 exec_always pkill kanshi; exec kanshi
-
-# Volumeicon
-exec --no-startup-id volumeicon
 
 # Blueman tray
 exec --no-startup-id blueman-applet
@@ -315,17 +312,18 @@ workspace 1 gaps outer 0
 # Only enable outer gaps when there is exactly one window or split container on the workspace.
 smart_gaps on
 
-# Brightness
-# Allow without sudo: `sudo usermod -aG video {$USER} && reboot`
-bindsym XF86MonBrightnessDown exec brightnessctl s 5%-
-bindsym XF86MonBrightnessUp exec brightnessctl s +5%
+# Use wob for showing audio and brightness levels
 
-# Use pactl to adjust volume in PulseAudio.
-set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
+exec rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
+
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5% && pactl get-sink-volume @DEFAULT_SINK@ | awk 'NR==1{print substr($5,1,length($5)-1)}' > $WOBSOCK
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5% && pactl get-sink-volume @DEFAULT_SINK@ | awk 'NR==1{print substr($5,1,length($5)-1)}' > $WOBSOCK
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && ( [ "$(pactl get-sink-mute @DEFAULT_SINK@)" = "Mute: yes" ] && echo 0 > $WOBSOCK ) || pactl get-sink-volume @DEFAULT_SINK@ | awk 'NR==1{print substr($5,1,length($5)-1)}' > $WOBSOCK
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && ( [ "$(pactl get-source-mute @DEFAULT_SOURCE@)" = "Mute: yes" ] && echo 0 > $WOBSOCK ) || pactl get-source-volume @DEFAULT_SOURCE@ | awk 'NR==1{print substr($5,1,length($5)-1)}' > $WOBSOCK
+
+bindsym XF86MonBrightnessUp exec brightnessctl set +10% | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $WOBSOCK
+bindsym XF86MonBrightnessDown exec brightnessctl set 10%- | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $WOBSOCK
 
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play-pause

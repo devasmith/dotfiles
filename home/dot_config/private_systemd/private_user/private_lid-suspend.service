@@ -1,0 +1,10 @@
+[Unit]
+Description=Suspend on lid close
+After=suspend.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/systemctl suspend
+
+[Install]
+WantedBy=suspend.target

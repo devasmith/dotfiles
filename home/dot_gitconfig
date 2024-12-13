@@ -87,7 +87,7 @@
   unmerged = magenta bold reverse
   untracked = red
   updated = green bold
-[includeIf "gitdir:~/git/workspace/"]
+[includeIf "gitdir:~/workspace/"]
   path = ~/.git-personal.conf
 [includeIf "gitdir:~/.local/share/chezmoi/"]
   path = ~/.git-personal.conf

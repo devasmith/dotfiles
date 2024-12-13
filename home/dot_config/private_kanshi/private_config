@@ -1,8 +1,8 @@
 # work
 profile {
-	output eDP-1
-	output "Lenovo Group Limited P27h-20 V90A9ZX0" mode 2560x1440
-	output "Lenovo Group Limited P27h-20 V90A9A7L" mode 2560x1440 transform 270
+	output eDP-1 position 7583,4603
+	output "Lenovo Group Limited P27h-20 V90A9ZX0" mode 2560x1440 transform 270 position 5772,2731
+	output "Lenovo Group Limited P27h-20 V90A9A7L" mode 2560x1440 position 7288,3163
 	exec swaymsg '[workspace="^(1|2|3)"] move workspace to "Lenovo Group Limited P27h-20 V90A9ZX0"'
 	exec swaymsg "workspace 4 move workspace to Lenovo Group Limited P27h-20 V90A9A7L"
 }

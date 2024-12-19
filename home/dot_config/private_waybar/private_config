@@ -1,0 +1,205 @@
+[
+{
+    "output": "eDP-1",
+    "layer": "top",
+    "position": "top",
+    "height": 30,
+    "spacing": 4,
+    "modules-left": [
+        "sway/workspaces",
+        "sway/mode",
+	"sway/scratchpad",
+        "custom/media"
+    ],
+    "modules-right": [
+    "idle_inhibitor",
+    "cpu",
+    "temperature",
+    "memory",
+    "backlight",
+    "network",
+    "clock",
+    "pulseaudio",
+    "bluetooth",
+    "battery",
+    "tray"
+    ],
+     "sway/workspaces": {
+         "disable-scroll": false,
+         "all-outputs": false,
+         "warp-on-scroll": false,
+         "format": "{name}: {icon}",
+         "format-icons": {
+         "1": " ",
+         "2": " ",
+         "3": " ",
+         "4": " ",
+         "5": " ",
+         "6": " ",
+         "urgent": " ",
+         "focused": " ",
+         "default": " "
+         }
+     },
+    "sway/language": {
+        "format": "{short} ",
+        "tooltip-format": "{long}"
+    },
+    "bluetooth": {
+        "format-on": "bt ",
+        "format-off": "{status} ",
+        "format-connected": "{device_alias} ",
+        "format-connected-battery": "{device_alias} [{device_battery_percentage}%] ",
+        "format-device-preference": [ "ugreen_1", "ugreen_2" ],
+        "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+        "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+	"on-click": "blueman-manager",
+    },
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    "custom/media": {
+        "format": "{icon} {}",
+        "return-type": "json",
+        "max-length": 40,
+        "format-icons": {
+            "spotify": "",
+            "default": "🎜"
+        },
+        "escape": true,
+        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
+        // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+    },
+    "sway/scratchpad": {
+        "format": "{icon} {count}",
+        "show-empty": false,
+        "format-icons": ["", ""],
+        "tooltip": true,
+        "tooltip-format": "{app}: {title}",
+        "on-click": "swaymsg 'scratchpad show'",
+        "on-click-right": "swaymsg 'move scratchpad'",
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    "tray": {
+        "icon-size": 12,
+        "spacing": 10
+    },
+    "clock": {
+        "interval": 1,
+        "timezone": "Europe/Stockholm",
+        "format": "{:%F %R:%S }",
+	"on-click": "gnome-calendar",
+    },
+    "cpu": {
+        "interval": 3,
+        "format": "{usage}% ",
+    },
+    "memory": {
+        "interval": 3,
+        "format": "{}% ",
+        "tooltip-format": "Used: {used:0.1f}G/{total:0.1f}G. Swap: {swapUsed:0.1f}G/{swapTotal:0.1f}G",
+        "states": {
+            "critical": 80
+        }
+    },
+    "temperature": {
+        "interval": 3,
+        "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
+        "critical-threshold": 80,
+        "format-critical": "{temperatureC}°C",
+        "format": "{temperatureC}°C",
+    },
+    "backlight": {
+        // "device": "acpi_video1",
+        "format": "{percent}% {icon}",
+        "format-icons": ["", "", "", "", "", "", "", "", ""]
+    },
+    "battery": {
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "bat {capacity}%",
+        //"format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        "format-good": "",
+        "format-full": "",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "battery#bat2": {
+        "bat": "BAT2"
+    },
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "{ipaddr}/{cidr} ",
+        "tooltip-format": "{ifname} via {gwaddr} ",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Disconnected ⚠",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "pulseaudio": {
+        "scroll-step": 2,
+        "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": "0% {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+        },
+        "on-click": "pavucontrol"
+    },
+}, {
+    "layer": "top",
+    "output": "!eDP-1",
+    "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad"],
+    "modules-right": ["clock"],
+    "clock": {
+        "interval": 1,
+        "timezone": "Europe/Stockholm",
+        "format": "{:%F %R:%S }",
+    },
+    "sway/workspaces": {
+        "disable-scroll": false,
+        "all-outputs": false,
+        "warp-on-scroll": false,
+        "format": "{name}: {icon}",
+        "format-icons": {
+        "1": " ",
+        "2": " ",
+        "3": " ",
+        "4": " ",
+        "5": " ",
+        "6": " ",
+        "urgent": " ",
+        "focused": " ",
+        "default": " "
+        }
+    },
+    "sway/scratchpad": {
+        "format": "{icon} {count}",
+        "show-empty": false,
+        "format-icons": ["", ""],
+        "tooltip": true,
+        "tooltip-format": "{app}: {title}",
+        "on-click": "swaymsg 'scratchpad show'",
+        "on-click-right": "swaymsg 'move scratchpad'",
+    },
+}]

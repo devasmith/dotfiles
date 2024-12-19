@@ -20,6 +20,8 @@ set $term alacritty
 # on the original workspace that the command was run on.
 set $menu dmenu_path | wmenu | xargs swaymsg exec --
 
+font pango:MesloLGMDZ Nerd Font 12
+
 include /etc/sway/config-vars.d/*
 
 ### Output configuration
@@ -47,7 +49,8 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 # resumed. It will also lock your screen before your computer goes to sleep.
 exec swayidle -w \
          timeout 600 '~/.local/bin/lockscreen.sh' \
-         timeout 900 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+         timeout 900 'swaymsg "output * power off"' \
+         resume 'swaymsg "output * power on"' \
          before-sleep '~/.local/bin/lockscreen.sh'
 
 # Lock the screen with a blurred screenshot
@@ -221,44 +224,7 @@ bindsym $mod+r mode "resize"
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
-  status_command i3status
-  position top
-  output eDP-1
-  tray_output eDP-1
-  separator_symbol "|"
-  colors {
-    background #282A36
-    statusline #F8F8F2
-    separator  #44475A
-
-    focused_workspace  #44475A #44475A #F8F8F2
-    active_workspace   #282A36 #44475A #F8F8F2
-    inactive_workspace #282A36 #282A36 #BFBFBF
-    urgent_workspace   #FF5555 #FF5555 #F8F8F2
-    binding_mode       #FF5555 #FF5555 #F8F8F2
-  }
-}
-
-bar {
-  position top
-  output "GIGA-BYTE TECHNOLOGY CO., LTD. Gigabyte M32U 23091B000665"
-  output "Lenovo Group Limited P27h-20 V90A9ZX0"
-  output "Lenovo Group Limited P24h-2L V308P34K"
-  output "Lenovo Group Limited P27h-20 V90A9A7L"
-  tray_output eDP-1
-  separator_symbol "|"
-  status_command i3status -c ~/.config/i3status/other-outputs.conf
-  colors {
-    background #282A36
-    statusline #F8F8F2
-    separator  #44475A
-
-    focused_workspace  #44475A #44475A #F8F8F2
-    active_workspace   #282A36 #44475A #F8F8F2
-    inactive_workspace #282A36 #282A36 #BFBFBF
-    urgent_workspace   #FF5555 #FF5555 #F8F8F2
-    binding_mode       #FF5555 #FF5555 #F8F8F2
-  }
+  swaybar_command waybar
 }
 
 #
@@ -295,7 +261,10 @@ exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DE
 exec_always pkill kanshi; exec kanshi
 
 # Blueman tray
-exec --no-startup-id blueman-applet
+#exec --no-startup-id blueman-applet
+
+# Networkmanager tray
+exec --no-startup-id nm-applet
 
 # Copyq
 bindsym $mod+p exec --no-startup-id copyq show clipboard

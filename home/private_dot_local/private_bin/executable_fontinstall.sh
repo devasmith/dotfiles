@@ -1,7 +1,7 @@
 #!/bin/bash
 
 declare -a fonts=(
-  JetBrainsMono
+  Meslo
 )
 
 version=$(curl -s 'https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest' | jq -r '.name')

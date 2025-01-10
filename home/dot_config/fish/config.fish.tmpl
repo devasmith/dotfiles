@@ -70,7 +70,7 @@ set -gx PATH /opt/homebrew/opt/gnu-tar/libexec/gnubin $PATH
 {{ else if eq .chezmoi.os "linux" }}
 
 set -x PATH /usr/local/bin ~/.local/bin /home/linuxbrew/.linuxbrew/bin ~/go/bin $PATH
-set -x SSH_AUTH_SOCK (find /run/user/(id -u)/keyring/ -type s -name 'ssh')
+set -x SSH_AUTH_SOCK (/usr/bin/find /run/user/(id -u)/keyring/ -type s -name 'ssh')
 
 {{ end }}
 

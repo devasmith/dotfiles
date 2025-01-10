@@ -231,26 +231,6 @@ bar {
 # Custom:
 #
 
-# Multi monitor
-set $workMonitor1 "Lenovo Group Limited P27h-20 V90A9A7L"
-set $workMonitor2 "Lenovo Group Limited P27h-20 V90A9ZX0"
-#set $homeMonitor1 "GIGA-BYTE TECHNOLOGY CO., LTD. Gigabyte M32U 23091B000665"
-#set $homeMonitor2 "Lenovo Group Limited P24h-2L V308P34K"
-
-workspace 1 output $workMonitor1
-#workspace 1 output $homeMonitor1
-workspace 2 output $workMonitor1
-#workspace 2 output $homeMonitor1
-workspace 3 output $workMonitor1
-#workspace 3 output $homeMonitor1
-workspace 4 output $workMonitor2
-workspace 5 output eDP-1
-#workspace 4 output $homeMonitor2
-#exec_always --no-startup-id swaymsg "workspace 1 move workspace to output '$firstMonitor'"
-#exec_always --no-startup-id swaymsg "workspace 2 move workspace to output '$firstMonitor'"
-#exec_always --no-startup-id swaymsg "workspace 3 move workspace to output '$firstMonitor'"
-#exec_always --no-startup-id swaymsg "workspace 4 move workspace to output '$secondMonitor'"
-
 # Screenshot
 bindsym --release Print exec --no-startup-id grimshot savecopy anything
 

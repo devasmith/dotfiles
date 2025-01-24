@@ -5,6 +5,9 @@ set -gx LC_ALL en_US.UTF-8
 set -gx LC_CTYPE en_US.UTF-8
 set -gx TERM xterm-256color
 
+set -x PATH /usr/local/bin ~/.local/bin /home/linuxbrew/.linuxbrew/bin /home/linuxbrew/.linuxbrew/sbin ~/go/bin $PATH
+set -x SSH_AUTH_SOCK (/usr/bin/find /run/user/(id -u)/keyring/ -type s -name 'ssh')
+
 if status is-interactive
     cd $HOME
     command -qv bat && alias cat bat
@@ -47,31 +50,5 @@ set -g fish_escape_delay_ms 300
 function fish_user_key_bindings
     bind \e. history-token-search-backward
 end
-
-{{ if eq .chezmoi.os "darwin" }}
-
-function upgrade
-    brew update
-    brew outdated
-    brew upgrade
-    brew cleanup
-    fisher update
-    softwareupdate -i -a
-end
-
-if status is-login
-    ssh-add -q --apple-use-keychain --apple-load-keychain
-end
-
-set -x PATH /usr/local/bin ~/.local/bin /opt/homebrew/bin ~/go/bin $PATH
-set -gx PATH /opt/homebrew/opt/gnu-sed/libexec/gnubin $PATH
-set -gx PATH /opt/homebrew/opt/gnu-tar/libexec/gnubin $PATH
-
-{{ else if eq .chezmoi.os "linux" }}
-
-set -x PATH /usr/local/bin ~/.local/bin /home/linuxbrew/.linuxbrew/bin ~/go/bin $PATH
-set -x SSH_AUTH_SOCK (/usr/bin/find /run/user/(id -u)/keyring/ -type s -name 'ssh')
-
-{{ end }}
 
 direnv hook fish | source

@@ -9,11 +9,11 @@ profile {
 
 # home
 profile {
-	output eDP-1 position 5300,2160
-	output "GIGA-BYTE TECHNOLOGY CO., LTD. Gigabyte M32U 23091B000665" mode 3840x2160@120Hz position 4480,0
-	output "Lenovo Group Limited P24h-2L V308P34K" mode 2560x1440 transform 270 position 3040,0
-	exec swaymsg '[workspace="^(1|2|3)"] move workspace to "GIGA-BYTE TECHNOLOGY CO., LTD. Gigabyte M32U 23091B000665"'
-	exec swaymsg "workspace 4 move workspace to Lenovo Group Limited P24h-2L V308P34K"
+	output eDP-1 position 2465,2594
+  output "Microstep MPG271QX OLED " mode 2560x1440@120Hz position 2160,1154
+	output "GIGA-BYTE TECHNOLOGY CO., LTD. Gigabyte M32U 23091B000665" mode 3840x2160@120Hz transform 270 position 0,0
+	exec swaymsg '[workspace="^(1|2|3)"] move workspace to "Microstep MPG271QX OLED "'
+  exec swaymsg "workspace 4 move workspace to eDP-1"
 }
 
 # laptop

@@ -246,12 +246,12 @@ exec_always pkill kanshi; exec kanshi
 # Networkmanager tray
 exec --no-startup-id nm-applet
 
-# Clipcat
-set $launcher-clipboard-insert clipcat-menu insert
-set $launcher-clipboard-remove clipcat-menu remove
-
-bindsym $mod+p exec $launcher-clipboard-insert
-bindsym $mod+o exec $launcher-clipboard-remove
+# ensure CopyQ is always floating instead of tiled
+for_window [app_id="com.github.hluk.copyq"] floating enable
+# start CopyQ on startup
+exec copyq --start-server
+# open CopyQ with the shortcut Super+C
+bindsym $mod+p exec copyq show
 
 # auto start applications
 exec --no-startup-id swaymsg 'workspace 1:Chrome; exec google-chrome-stable'

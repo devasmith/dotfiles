@@ -1,19 +1,28 @@
 # work
 profile {
-	output eDP-1 position 7583,4603
-	output "Lenovo Group Limited P27h-20 V90A9ZX0" mode 2560x1440 transform 270 position 5772,2731
-	output "Lenovo Group Limited P27h-20 V90A9A7L" mode 2560x1440 position 7288,3163
-	exec swaymsg '[workspace="^(1|2|3)"] move workspace to "Lenovo Group Limited P27h-20 V90A9A7L"'
-	exec swaymsg "workspace 4 move workspace to Lenovo Group Limited P27h-20 V90A9ZX0"
+	output eDP-1 position 1440,1440
+	output "Lenovo Group Limited P24h-2L V308P56B" mode 2560x1440 transform 270 position 0,0
+	output "Lenovo Group Limited P24h-30 V90CABG6" mode 2560x1440 position 1440,0
+	exec swaymsg '[workspace="^(1|2|3)"] move workspace to "Lenovo Group Limited P24h-30 V90CABG6"'
+	exec swaymsg "workspace 4 move workspace to Lenovo Group Limited P24h-2L V308P56B"
+}
+
+# work vxo
+profile {
+	output eDP-1 position 1440,1795
+	output "Lenovo Group Limited P27h-30 V30BZTMP" mode 2560x1440@60Hz transform 270 position 0,0
+	output "Lenovo Group Limited P27h-30 V30BZT0L" mode 2560x1440@60Hz position 1440,355
+	exec swaymsg '[workspace="^(1|2|3)"] move workspace to "Lenovo Group Limited P27h-30 V30BZT0L"'
+	exec swaymsg "workspace 4 move workspace to Lenovo Group Limited P27h-30 V30BZTMP"
 }
 
 # home
 profile {
-	output eDP-1 position 1627,1440
-  output "Microstep MPG271QX OLED " mode 2560x1440@240Hz position 1440,0
-  output "Lenovo Group Limited P24h-2L V308P34K" mode 2560x1440@60Hz transform 270 position 0,0
+	output eDP-1 position 0,434
+  output "Microstep MPG271QX OLED " mode 2560x1440@240Hz position 1920,0
+#  output "Lenovo Group Limited P24h-2L V308P34K" mode 2560x1440@60Hz transform 270 position 0,0
 	exec swaymsg '[workspace="^(1|2|3)"] move workspace to "Microstep MPG271QX OLED "'
-  exec swaymsg 'workspace 4 move workspace to Lenovo Group Limited P24h-2L V308P34K'
+#  exec swaymsg 'workspace 4 move workspace to Lenovo Group Limited P24h-2L V308P34K'
 }
 
 # laptop

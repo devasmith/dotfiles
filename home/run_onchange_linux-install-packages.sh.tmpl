@@ -17,90 +17,33 @@ brew "atuin"
 brew "fd"
 brew "k9s"
 brew "neovim"
-brew "thefuck"
 brew "yaml-language-server"
 brew "git-delta"
 brew "fd"
-brew "ripgrep"
 brew "sops"
 brew "tree-sitter"
 brew "fluxcd/tap/flux"
 EOF
 
-# Snap
-## classic
-while read package; do
-    sudo snap install --classic "$package"
-done <<EOF
-alacritty
-go
-EOF
-
-# APT
-
-sudo add-apt-repository ppa:hluk/copyq -y
-sudo apt update
-
-sudo apt install -y $(cat <<EOF
-sway
-swaylock
-swayidle
-copyq
-grimshot
-wdisplays
-wofi
-wob
-waybar
-kanshi
-mako-notifier
-xdg-desktop-portal-wlr
-bat
-code
-copyq
-xclip
-git
+# Fedora (dnf) packages
+if command -v dnf &> /dev/null; then
+    echo "Installing Fedora packages with dnf..."
+    sudo dnf install -y $(cat <<EOF
 htop
 imagemagick
-pulseaudio-utils
-volumeicon-alsa
+pipewire-utils
+pavucontrol
 blueman
 playerctl
 lxappearance
 ipcalc
-jq
-scrot
 tcpdump
 ncdu
 direnv
 brightnessctl
-build-essential
 shellcheck
 fzf
-fish
-tmux
-mosh
-lastpass-cli
 EOF
 )
-
-# systemd services
-systemctl daemon-reload --user
-systemctl enable --now --user gnome-keyring-daemon 
-systemctl enable --now --user lid-suspend
-
-fish="/usr/bin/fish"
-if [[ ! -f "$HOME/.config/fish/completions/fisher.fish" ]]; then
-  $fish -c 'curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher'
-fi
-
-echo "Install/upgrade fisher plugins"
-fisher_packages="jethrokuan/z IlanCosman/tide@v6 jethrokuan/fzf jhillyerd/plugin-git meaningful-ooo/sponge dracula/fish edc/bass"
-for package in $fisher_packages; do
-    if ! $fish -c "fisher list | grep -q -i $package"; then
-      $fish -c "fisher install $package"
-    else
-      $fish -c "fisher update $package"
-    fi
-done
 
 {{ end -}}

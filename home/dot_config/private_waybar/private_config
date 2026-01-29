@@ -19,7 +19,6 @@
     "memory",
     "network",
     "pulseaudio",
-    "bluetooth",
     "backlight",
     "battery",
     "clock",
@@ -45,18 +44,6 @@
     "sway/language": {
         "format": "{short} ",
         "tooltip-format": "{long}"
-    },
-    "bluetooth": {
-        "format-on": "bt ",
-        "format-off": "{status} ",
-        "format-connected": "{device_alias} ",
-        "format-connected-battery": "{device_alias} [{device_battery_percentage}%] ",
-        "format-device-preference": [ "ugreen_1", "ugreen_2" ],
-        "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
-        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
-        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-        "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
-	"on-click": "blueman-manager",
     },
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
@@ -109,7 +96,6 @@
         "interval": 1,
         "timezone": "Europe/Stockholm",
         "format": "{:%F %R:%S }",
-	"on-click": "gnome-calendar",
     },
     "cpu": {
         "interval": 3,

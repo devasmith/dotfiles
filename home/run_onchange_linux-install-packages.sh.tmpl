@@ -2,6 +2,29 @@
 #!/bin/bash
 mkdir -p $HOME/.local/bin
 
+# Fedora (dnf) packages
+if command -v dnf &> /dev/null; then
+    echo "Installing Fedora packages with dnf..."
+    sudo dnf install -y $(cat <<EOF
+htop
+imagemagick
+pipewire-utils
+pavucontrol
+blueman
+playerctl
+lxappearance
+ipcalc
+tcpdump
+ncdu
+direnv
+brightnessctl
+shellcheck
+fzf
+git
+EOF
+)
+fi
+
 # Install Homebrew
 # https://brew.sh/
 if command -v brew; then
@@ -25,25 +48,5 @@ brew "tree-sitter"
 brew "fluxcd/tap/flux"
 EOF
 
-# Fedora (dnf) packages
-if command -v dnf &> /dev/null; then
-    echo "Installing Fedora packages with dnf..."
-    sudo dnf install -y $(cat <<EOF
-htop
-imagemagick
-pipewire-utils
-pavucontrol
-blueman
-playerctl
-lxappearance
-ipcalc
-tcpdump
-ncdu
-direnv
-brightnessctl
-shellcheck
-fzf
-EOF
-)
 
 {{ end -}}

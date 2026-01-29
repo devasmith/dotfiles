@@ -1,3 +1,0 @@
-{{- if eq .chezmoi.os "linux" -}}
-{{ (index (lastpass "ssh-linux") 0).note.privateKey }}
-{{ end -}}

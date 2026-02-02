@@ -240,17 +240,15 @@ exec_always pkill kanshi; exec kanshi
 exec --no-startup-id nm-applet
 
 # auto start applications
-#exec --no-startup-id swaymsg 'workspace 1:Chrome; exec google-chrome-stable'
-#exec --no-startup-id swaymsg 'workspace 2:Terminal; exec alacritty'
+exec --no-startup-id swaymsg 'workspace 1:Chromium; exec chromium-browser'
+exec --no-startup-id swaymsg 'workspace 2:Terminal; exec foot'
 #exec --no-startup-id swaymsg 'workspace 4:Slack; exec slack'
 #exec --no-startup-id swaymsg 'workspace 5:Firefox; exec firefox'
 
 # auto assign
 # run `swaymsg -t get_tree` to get info about applications
-#assign [class="Google-chrome"] 1
-#assign [app_id="Alacritty"] 2
-#assign [class="Slack"] 4
-#assign [app_id="firefox"] 5
+assign [app_id="chromium-browser"] 1
+assign [app_id="foot"] 2
 
 # Navigate workspaces next / previous with ctrl+arrow right/left
 bindsym Control+Right workspace next

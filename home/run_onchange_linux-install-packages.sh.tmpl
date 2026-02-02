@@ -6,6 +6,7 @@ mkdir -p $HOME/.local/bin
 if command -v dnf &> /dev/null; then
     echo "Installing Fedora packages with dnf..."
     sudo dnf install -y $(cat <<EOF
+chromium
 htop
 imagemagick
 pipewire-utils

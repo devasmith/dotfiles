@@ -1,9 +1,5 @@
+{{- if eq .chezmoi.os "linux" -}}
 git
-{{- if ne .chezmoi.os "darwin" }}
-.config/sketchybar
-.config/skhd
-.config/yabai
-{{ else if ne .chezmoi.os "linux" }}
 .config/sway
 .config/kanshi
 .config/i3status

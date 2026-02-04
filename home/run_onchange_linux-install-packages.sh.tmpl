@@ -8,7 +8,6 @@ if command -v dnf &> /dev/null; then
     sudo dnf install -y $(cat <<EOF
 chromium
 htop
-imagemagick
 pipewire-utils
 pavucontrol
 blueman
@@ -23,6 +22,7 @@ shellcheck
 fzf
 git
 firefox
+fish
 rofi
 waybar
 wob
@@ -54,5 +54,20 @@ brew "sops"
 brew "tree-sitter"
 EOF
 
+fish="/usr/bin/fish"
+if [[ ! -f "$HOME/.config/fish/completions/fisher.fish" ]]; then
+  $fish -c 'curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source'
+  $fish -c 'fisher install jorgebucaran/fisher'
+fi
+
+echo "Install/upgrade fisher plugins"
+fisher_packages="jethrokuan/z IlanCosman/tide@v6 jethrokuan/fzf jhillyerd/plugin-git"
+for package in $fisher_packages; do
+    if ! $fish -c "fisher list | grep -q -i $package"; then
+        $fish -c "fisher install $package"
+    else
+    	$fish -c "fisher update $package"
+    fi
+done
 
 {{ end -}}

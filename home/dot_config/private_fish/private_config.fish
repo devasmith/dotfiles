@@ -8,12 +8,15 @@ if status is-interactive
   cd $HOME
 end
 
-set -x PATH /usr/local/bin ~/.local/bin ~/go/bin $PATH
+set -x PATH /home/linuxbrew/.linuxbrew/bin /usr/local/bin ~/.local/bin ~/go/bin $PATH
 set -gx EDITOR nvim
 set -gx GOPATH $HOME/go
 set -gx K9S_CONFIG_DIR $HOME/.config/k9s
 
 direnv hook fish | source
+
+functions -e gup
+abbr -e gup
 
 set -g fish_escape_delay_ms 300
 function fish_user_key_bindings

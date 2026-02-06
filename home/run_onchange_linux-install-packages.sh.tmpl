@@ -57,6 +57,14 @@ brew "tree-sitter"
 brew "gup"
 EOF
 
+# Go packages
+if command -v go &> /dev/null; then
+    if ! command -v clipse &> /dev/null; then
+        go install github.com/savedra1/clipse@v1.2.1
+    fi
+fi
+
+# Fish shell
 fish="/usr/bin/fish"
 
 if [[ ! -f "$HOME/.config/fish/functions/fisher.fish" ]]; then

@@ -8,8 +8,8 @@ Managed with [chezmoi](https://github.com/twpayne/chezmoi).
 sh -c "$(curl -fsLS get.chezmoi.io/lb)" -- init --apply $GITHUB_USERNAME
 ```
 
-Personal secrets are stored in 1Password and you'll need the 1Password CLI installed. Login to 1Password with:
+Personal secrets are stored in Proton Pass and you'll need the pass-cli installed.
 
 ```bash
-eval $(op signin --account my)
+pass-cli login
 ```

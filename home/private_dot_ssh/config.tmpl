@@ -1,1 +1,3 @@
-{{- onepasswordDocument "wxjf2llnairda3pzobaip3ch3u" -}}
+{{- $master := (protonPass .proton_master_uri | fromJson) -}}
+
+{{- protonPass $master.ssh_config -}}

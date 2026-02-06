@@ -1,0 +1,8 @@
+{{- if eq .chezmoi.os "linux" -}}
+#!/bin/bash
+
+command -v pass-cli && exit 0
+
+curl -fsSL https://proton.me/download/pass-cli/install.sh | bash
+
+{{ end -}}

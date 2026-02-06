@@ -1,0 +1,4 @@
+{{- $master_uri := promptStringOnce . "master_uri" "Proton Master URI (saved in Proton Pass under 'Chezmoi Setup')" -}}
+
+data:
+  proton_master_uri: {{ $master_uri | quote }}

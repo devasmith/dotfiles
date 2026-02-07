@@ -237,9 +237,6 @@ bindsym --release Print exec --no-startup-id grimshot savecopy anything
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 exec gnome-keyring-daemon --start --components=pkcs11,secrets,ssh
 
-# pass-cli ssh agent
-exec pass-cli ssh-agent start
-
 # Kanshi
 exec_always pkill kanshi; exec kanshi
 

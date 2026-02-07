@@ -7,6 +7,7 @@ set -gx PROTON_PASS_KEY_PROVIDER fs
 set -gx EDITOR nvim
 set -gx VISUAL nvim
 alias vim="nvim"
+alias j="z"
 
 if status is-interactive
     cd $HOME

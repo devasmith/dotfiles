@@ -8,7 +8,7 @@ if status is-interactive
   cd $HOME
 end
 
-set -x PATH /home/linuxbrew/.linuxbrew/bin /usr/local/bin ~/.local/bin ~/go/bin $PATH
+set -x PATH /usr/local/bin ~/.local/bin ~/go/bin $PATH
 set -gx GOPATH $HOME/go
 set -gx K9S_CONFIG_DIR $HOME/.config/k9s
 

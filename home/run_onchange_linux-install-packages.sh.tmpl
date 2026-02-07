@@ -23,6 +23,7 @@ brightnessctl
 shellcheck
 fzf
 git
+git-delta
 firefox
 fish
 rofi
@@ -31,33 +32,13 @@ direnv
 wob
 mako
 golang
+atuin
+k9s
 
 EOF
 )
 fi
 
-# Install Homebrew
-# https://brew.sh/
-if command -v brew; then
-    brew update
-else
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-fi
-
-# Install brew packages
-brew bundle --file=/dev/stdin <<EOF
-brew "ali"
-brew "atuin"
-brew "fd"
-brew "k9s"
-brew "neovim"
-brew "yaml-language-server"
-brew "git-delta"
-brew "fd"
-brew "sops"
-brew "tree-sitter"
-brew "gup"
-EOF
 
 # Go packages
 if command -v go &> /dev/null; then

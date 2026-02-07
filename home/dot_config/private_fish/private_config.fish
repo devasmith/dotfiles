@@ -3,6 +3,7 @@ set fish_greeting ""
 set -gx LC_ALL en_US.UTF-8
 set -gx LC_CTYPE en_US.UTF-8
 set -gx TERM xterm-256color
+set -gx PROTON_PASS_KEY_PROVIDER fs
 
 if status is-interactive
   cd $HOME
@@ -11,6 +12,7 @@ end
 set -x PATH /usr/local/bin ~/.local/bin ~/go/bin $PATH
 set -gx GOPATH $HOME/go
 set -gx K9S_CONFIG_DIR $HOME/.config/k9s
+set -gx SSH_AUTH_SOCK "$HOME/.ssh/proton-pass-agent.sock"
 
 direnv hook fish | source
 

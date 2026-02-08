@@ -1,0 +1,18 @@
+#!/bin/bash
+set -e
+
+for group in video input; do
+  if getent group "$group" > /dev/null; then
+    sudo usermod -aG "$group" {{ .chezmoi.username }}
+    fi
+done
+
+if [ ! -f /etc/sysctl.d/99-custom-limits.conf ]; then
+  cat <<EOF | sudo tee /etc/sysctl.d/99-custom-limits.conf
+fs.inotify.max_user_watches=524288
+fs.inotify.max_user_instances=512
+vm.max_map_count=262144
+vm.swappiness=10
+EOF
+  sudo sysctl --system
+fi

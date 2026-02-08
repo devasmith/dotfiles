@@ -8,6 +8,7 @@ set -gx EDITOR nvim
 set -gx VISUAL nvim
 alias vim="nvim"
 alias j="z"
+alias docker="podman"
 
 if status is-interactive
     cd $HOME
@@ -16,6 +17,7 @@ end
 set -x PATH /usr/local/bin ~/.local/bin ~/go/bin $PATH
 set -gx GOPATH $HOME/go
 set -gx K9S_CONFIG_DIR $HOME/.config/k9s
+set -gx KIND_EXPERIMENTAL_PROVIDER "podman"
 
 if test -z "$SSH_AUTH_SOCK"
     set -gx SSH_AUTH_SOCK "$XDG_RUNTIME_DIR/keyring/ssh"

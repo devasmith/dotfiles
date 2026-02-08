@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-SUDOERS_CONTENT="{{ .chezmoi.username }} ALL=(ALL) NOPASSWD: /usr/bin/dnf update, /usr/bin/dnf upgrade, /usr/bin/fwupdmgr update"
+SUDOERS_CONTENT="{{ .chezmoi.username }} ALL=(ALL) NOPASSWD: /usr/bin/dnf search, /usr/bin/dnf update, /usr/bin/dnf upgrade, /usr/bin/dnf install, /usr/bin/dnf remove, /usr/bin/fwupdmgr update"
 echo "$SUDOERS_CONTENT" > /tmp/99-updates
 
 if visudo -c -f /tmp/99-updates; then

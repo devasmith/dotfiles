@@ -1,10 +1,15 @@
 #!/bin/bash
 set -e
 
+if [ "$(hostnamectl --static)" != "nibble" ]; then
+
+  sudo hostnamectl set-hostname nibble
+fi
+
 for group in video input; do
-  if getent group "$group" > /dev/null; then
-    sudo usermod -aG "$group" {{ .chezmoi.username }}
-    fi
+  if getent group "$group" >/dev/null; then
+    sudo usermod -aG "$group" "{{ .chezmoi.username }}"
+  fi
 done
 
 if [ ! -f /etc/sysctl.d/99-custom-limits.conf ]; then
@@ -16,3 +21,6 @@ vm.swappiness=10
 EOF
   sudo sysctl --system
 fi
+
+sudo systemctl enable --now earlyoom
+systemctl --user enable --now podman

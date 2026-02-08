@@ -3,9 +3,10 @@
 mkdir -p $HOME/.local/bin
 
 # Fedora (dnf) packages
-if command -v dnf &> /dev/null; then
-    echo "Installing Fedora packages with dnf..."
-    sudo dnf install -y $(cat <<EOF
+if command -v dnf &>/dev/null; then
+  echo "Installing Fedora packages with dnf..."
+  sudo dnf install -y $(
+    cat <<EOF
 chromium
 htop
 pipewire-utils
@@ -53,18 +54,20 @@ k9s
 kind
 kubectl
 earlyoom
+nodejs-bash-language-server
+ShellCheck
+shfmt
 @virtualization
 
 EOF
-)
+  )
 fi
 
-
 # Go packages
-if command -v go &> /dev/null; then
-    if ! command -v clipse &> /dev/null; then
-        go install github.com/savedra1/clipse@v1.2.1
-    fi
+if command -v go &>/dev/null; then
+  if ! command -v clipse &>/dev/null; then
+    go install github.com/savedra1/clipse@v1.2.1
+  fi
 fi
 
 # Fish shell
@@ -78,7 +81,7 @@ fi
 fisher_packages=("jethrokuan/z" "IlanCosman/tide@v6" "jethrokuan/fzf" "jhillyerd/plugin-git")
 
 for package in "${fisher_packages[@]}"; do
-    $fish -c "fisher install $package"
+  $fish -c "fisher install $package"
 done
 
 {{ end -}}

@@ -66,7 +66,7 @@ bindsym Control+$mod+l exec --no-startup-id 'swaylock -f -c 000000'
 # Read `man 5 sway-input` for more information about this section.
 input "type:keyboard" {
     xkb_layout se
-    xkb_variant ,nodeadkeys
+    xkb_variant nodeadkeys
     xkb_options grp:alt_shift_toggle
 }
 
@@ -236,7 +236,7 @@ bindsym --release Print exec --no-startup-id grimshot savecopy anything
 
 # Set XDG_CURRENT_DESKTOP
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
-exec gnome-keyring-daemon --start --components=pkcs11,secrets,ssh
+exec "gnome-keyring-daemon --start --components=pkcs11,secrets,ssh"
 
 # Kanshi
 exec_always pkill kanshi; exec kanshi

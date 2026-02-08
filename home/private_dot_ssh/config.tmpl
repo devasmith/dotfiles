@@ -1,3 +1,0 @@
-{{- $master := (protonPass .proton_master_uri | fromJson) -}}
-
-{{- protonPass $master.ssh_config -}}

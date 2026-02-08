@@ -16,12 +16,6 @@ end
 set -x PATH /usr/local/bin ~/.local/bin ~/go/bin $PATH
 set -gx GOPATH $HOME/go
 set -gx K9S_CONFIG_DIR $HOME/.config/k9s
-set -gx SSH_AUTH_SOCK "$HOME/.ssh/proton-pass-agent.sock"
-if not pgrep -f pass-cli >/dev/null
-
-    pass-cli ssh-agent start >/dev/null 2>&1 &
-    disown
-end
 
 direnv hook fish | source
 

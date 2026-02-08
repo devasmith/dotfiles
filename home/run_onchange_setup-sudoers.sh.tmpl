@@ -1,0 +1,11 @@
+#!/bin/bash
+set -e
+
+SUDOERS_CONTENT="{{ .chezmoi.username }} ALL=(ALL) NOPASSWD: /usr/bin/dnf update, /usr/bin/dnf upgrade, /usr/bin/fwupdmgr update"
+echo "$SUDOERS_CONTENT" > /tmp/99-updates
+
+if visudo -c -f /tmp/99-updates; then
+  sudo cp /tmp/99-updates /etc/sudoers.d/99-updates
+  sudo chmod 0440 /etc/sudoers.d/99-updates
+  sudo chown root:root /etc/sudoers.d/99-updates
+fi

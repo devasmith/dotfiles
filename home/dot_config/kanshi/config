@@ -9,11 +9,9 @@ profile {
 
 # home
 profile {
-	output eDP-1 position 0,434
-  output "Microstep MPG271QX OLED " mode 2560x1440@240Hz position 1920,0
-#  output "Lenovo Group Limited P24h-2L V308P34K" mode 2560x1440@60Hz transform 270 position 0,0
-	exec swaymsg '[workspace="^(1|2|3)"] move workspace to "Microstep MPG271QX OLED "'
-#  exec swaymsg 'workspace 4 move workspace to Lenovo Group Limited P24h-2L V308P34K'
+	output eDP-1 position 0,0
+  output "Microstep MPG271QX OLED 0x01010101" mode 2560x1440@240Hz position 1280,0
+	exec swaymsg '[workspace="^(1|2|3)"] move workspace to "Microstep MPG271QX OLED 0x01010101"'
 }
 
 # laptop

@@ -117,26 +117,17 @@
         "format": "{temperatureC}°C",
     },
     "backlight": {
-        // "device": "acpi_video1",
+        "device": "intel_backlight",
         "format": "{percent}% {icon}",
         "format-icons": ["", "", "", "", "", "", "", "", ""]
     },
     "battery": {
-        "states": {
-            "good": 80,
-            "warning": 30,
-            "critical": 15
-        },
-        "format": "bat {capacity}%",
-        //"format-charging": "{capacity}% ",
+        "states": { "good": 80, "warning": 30, "critical": 5 },
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ⚡ {icon}",
         "format-plugged": "{capacity}% ",
         "format-alt": "{time} {icon}",
-        "format-good": "",
-        "format-full": "",
         "format-icons": ["", "", "", "", ""]
-    },
-    "battery#bat2": {
-        "bat": "BAT2"
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface

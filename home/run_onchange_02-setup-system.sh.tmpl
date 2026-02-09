@@ -1,6 +1,30 @@
 #!/bin/bash
 set -e
 
+mkdir -p ~/Pictures/Screenshots
+
+# --- Nerd Font (Waybar icons etc) ---
+if ! fc-list | grep -qi "JetBrainsMono Nerd Font"; then
+  echo "Installing JetBrainsMono Nerd Font..."
+
+  FONT_DIR="$HOME/.local/share/fonts/JetBrainsMonoNerd"
+  ZIP_URL="https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
+
+  mkdir -p "$FONT_DIR"
+
+  tmpzip="$(mktemp -t JetBrainsMonoNerd.XXXXXX.zip)"
+  curl -fsSL --retry 3 --retry-delay 1 -o "$tmpzip" "$ZIP_URL"
+
+  unzip -o "$tmpzip" -d "$FONT_DIR" >/dev/null
+  rm -f "$tmpzip"
+
+  fc-cache -f >/dev/null
+
+  echo "JetBrainsMono Nerd Font installed."
+else
+  echo "JetBrainsMono Nerd Font already present."
+fi
+
 if [ "$(hostnamectl --static)" != "nibble" ]; then
   sudo hostnamectl set-hostname nibble
 fi
@@ -38,10 +62,13 @@ if ! command -v ollama &>/dev/null; then
     # Wait for Ollama to be ready
     timeout 30 bash -c 'until curl -s http://localhost:11434/api/tags >/dev/null 2>&1; do sleep 1; done' 2>/dev/null || true
 
-    # Pull coding model if not present
-    if ! ollama list 2>/dev/null | grep -q "qwen2.5-coder:32b"; then
-      ollama pull qwen2.5-coder:32b-instruct-q4_K_M || true
-    fi
+    for model in \
+      qwen2.5-coder:7b-instruct-q4_K_M \
+      qwen2.5-coder:3b-instruct-q4_K_M; do
+      if ! ollama list 2>/dev/null | grep -q "$model"; then
+        ollama pull "$model" || true
+      fi
+    done
   fi
 
   # Create Open WebUI container

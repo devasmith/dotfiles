@@ -22,5 +22,33 @@ EOF
   sudo sysctl --system
 fi
 
+# Enable services
 sudo systemctl enable --now earlyoom
+sudo systemctl enable --now ollama
 systemctl --user enable --now podman
+
+# Wait for Ollama to be ready
+#timeout 30 bash -c 'until curl -s http://localhost:11434/api/tags >/dev/null 2>&1; do sleep 1; done' || true
+
+# Pull coding model
+if ! ollama list | grep -q "qwen2.5-coder:32b"; then
+  ollama pull qwen2.5-coder:32b-instruct-q4_K_M
+fi
+
+# Create Open WebUI container
+if ! podman ps -a --format "{{.Names}}" | grep -q "^open-webui$"; then
+  podman run -d \
+    -p 3000:8080 \
+    --add-host=host.docker.internal:host-gateway \
+    -v open-webui:/app/backend/data \
+    --name open-webui \
+    --restart always \
+    ghcr.io/open-webui/open-webui:main
+  
+  # Generate systemd service for auto-start
+  mkdir -p ~/.config/systemd/user/
+  podman generate systemd --name open-webui --files --new \
+    --container-prefix="" --separator="" > ~/.config/systemd/user/open-webui.service
+  systemctl --user daemon-reload
+  systemctl --user enable open-webui.service
+fi

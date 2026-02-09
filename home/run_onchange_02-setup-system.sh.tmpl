@@ -24,7 +24,7 @@ fi
 
 # Enable services
 sudo systemctl enable --now earlyoom
-sudo systemctl enable --now ollama
+if command -v ollama &> /dev/null; then sudo systemctl enable --now ollama || true; fi
 systemctl --user enable --now podman
 
 # Setup Ollama models

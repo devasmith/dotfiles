@@ -36,7 +36,7 @@ if ! ollama list | grep -q "qwen2.5-coder:32b"; then
 fi
 
 # Create Open WebUI container
-if ! podman ps -a --format "{{.Names}}" | grep -q "^open-webui$"; then
+if ! podman container exists open-webui 2>/dev/null; then
   podman run -d \
     -p 3000:8080 \
     --add-host=host.docker.internal:host-gateway \
@@ -44,10 +44,10 @@ if ! podman ps -a --format "{{.Names}}" | grep -q "^open-webui$"; then
     --name open-webui \
     --restart always \
     ghcr.io/open-webui/open-webui:main
-  
+
   # Generate systemd service for auto-start
   mkdir -p ~/.config/systemd/user/
-  podman generate systemd --name open-webui --files --new \
+  podman generate systemd --name open-webui --new \
     --container-prefix="" --separator="" > ~/.config/systemd/user/open-webui.service
   systemctl --user daemon-reload
   systemctl --user enable open-webui.service

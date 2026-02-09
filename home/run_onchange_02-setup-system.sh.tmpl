@@ -2,7 +2,6 @@
 set -e
 
 if [ "$(hostnamectl --static)" != "nibble" ]; then
-
   sudo hostnamectl set-hostname nibble
 fi
 
@@ -24,35 +23,42 @@ fi
 
 # Enable services
 sudo systemctl enable --now earlyoom
-if command -v ollama &> /dev/null; then sudo systemctl enable --now ollama || true; fi
-systemctl --user enable --now podman
 
-# Setup Ollama models
-if systemctl is-active --quiet ollama 2>/dev/null; then
-  # Wait for Ollama to be ready
-  timeout 30 bash -c 'until curl -s http://localhost:11434/api/tags >/dev/null 2>&1; do sleep 1; done' 2>/dev/null || true
+# Only setup AI stack if Ollama is installed
+if command -v ollama &> /dev/null; then
+  # Enable Ollama service
+  sudo systemctl enable --now ollama || true
   
-  # Pull coding model if not present
-  if ! ollama list 2>/dev/null | grep -q "qwen2.5-coder:32b"; then
-    ollama pull qwen2.5-coder:32b-instruct-q4_K_M || true
+  # Enable Podman for containers
+  systemctl --user enable --now podman
+  
+  # Setup Ollama models
+  if systemctl is-active --quiet ollama 2>/dev/null; then
+    # Wait for Ollama to be ready
+    timeout 30 bash -c 'until curl -s http://localhost:11434/api/tags >/dev/null 2>&1; do sleep 1; done' 2>/dev/null || true
+    
+    # Pull coding model if not present
+    if ! ollama list 2>/dev/null | grep -q "qwen2.5-coder:32b"; then
+      ollama pull qwen2.5-coder:32b-instruct-q4_K_M || true
+    fi
   fi
-fi
-
-# Create Open WebUI container
-if ! podman container exists open-webui 2>/dev/null; then
-  podman run -d \
-    -p 3000:8080 \
-    --add-host=host.docker.internal:host-gateway \
-    -v open-webui:/app/backend/data \
-    --name open-webui \
-    --restart always \
-    ghcr.io/open-webui/open-webui:main
   
-  mkdir -p ~/.config/systemd/user/
-  podman generate systemd --name open-webui --new \
-    --container-prefix="" --separator="" > ~/.config/systemd/user/open-webui.service
-  systemctl --user daemon-reload
-  systemctl --user enable open-webui.service
-else
-  podman start open-webui 2>/dev/null || true
+  # Create Open WebUI container
+  if ! podman container exists open-webui 2>/dev/null; then
+    podman run -d \
+      -p 3000:8080 \
+      --add-host=host.docker.internal:host-gateway \
+      -v open-webui:/app/backend/data \
+      --name open-webui \
+      --restart always \
+      ghcr.io/open-webui/open-webui:main
+    
+    mkdir -p ~/.config/systemd/user/
+    podman generate systemd --name open-webui --new \
+      --container-prefix="" --separator="" > ~/.config/systemd/user/open-webui.service
+    systemctl --user daemon-reload
+    systemctl --user enable open-webui.service
+  else
+    podman start open-webui 2>/dev/null || true
+  fi
 fi

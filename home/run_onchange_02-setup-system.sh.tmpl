@@ -25,37 +25,39 @@ fi
 sudo systemctl enable --now earlyoom
 
 # Only setup AI stack if Ollama is installed
-if command -v ollama &> /dev/null; then
+if ! command -v ollama &>/dev/null; then
+  curl -fsSL https://ollama.com/install.sh | sh
   # Enable Ollama service
   sudo systemctl enable --now ollama || true
-  
+
   # Enable Podman for containers
   systemctl --user enable --now podman
-  
+
   # Setup Ollama models
   if systemctl is-active --quiet ollama 2>/dev/null; then
     # Wait for Ollama to be ready
     timeout 30 bash -c 'until curl -s http://localhost:11434/api/tags >/dev/null 2>&1; do sleep 1; done' 2>/dev/null || true
-    
+
     # Pull coding model if not present
     if ! ollama list 2>/dev/null | grep -q "qwen2.5-coder:32b"; then
       ollama pull qwen2.5-coder:32b-instruct-q4_K_M || true
     fi
   fi
-  
+
   # Create Open WebUI container
   if ! podman container exists open-webui 2>/dev/null; then
     podman run -d \
-      -p 3000:8080 \
-      --add-host=host.docker.internal:host-gateway \
-      -v open-webui:/app/backend/data \
       --name open-webui \
+      --network host \
+      -p 127.0.0.1:3000:8080 \
+      -e OLLAMA_BASE_URL=http://127.0.0.1:11434 \
+      -v open-webui:/app/backend/data \
       --restart always \
       ghcr.io/open-webui/open-webui:main
-    
+
     mkdir -p ~/.config/systemd/user/
     podman generate systemd --name open-webui --new \
-      --container-prefix="" --separator="" > ~/.config/systemd/user/open-webui.service
+      --container-prefix="" --separator="" >~/.config/systemd/user/open-webui.service
     systemctl --user daemon-reload
     systemctl --user enable open-webui.service
   else

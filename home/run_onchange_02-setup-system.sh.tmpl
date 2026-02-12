@@ -29,7 +29,7 @@ if [ "$(hostnamectl --static)" != "nibble" ]; then
   sudo hostnamectl set-hostname nibble
 fi
 
-for group in video input; do
+for group in video input libvirt; do
   if getent group "$group" >/dev/null; then
     sudo usermod -aG "$group" "{{ .chezmoi.username }}"
   fi
@@ -44,6 +44,15 @@ vm.swappiness=10
 EOF
   sudo sysctl --system
 fi
+
+# Setup logind conf
+sudo mkdir -p /etc/systemd/logind.conf.d
+cat <<EOF | sudo tee /etc/systemd/logind.conf.d/custom.conf
+[Login]
+HandleLidSwitch=suspend
+HandleLidSwitchExternalPower=ignore
+HandleLidSwitchDocked=ignore
+EOF
 
 # Enable services
 sudo systemctl enable --now earlyoom

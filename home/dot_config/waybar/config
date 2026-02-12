@@ -81,7 +81,7 @@
     "clock": {
         "interval": 1,
         "timezone": "Europe/Stockholm",
-        "format": "{:%F %R:%S }",
+        "format": "{:%F %R:%S}",
     },
     "cpu": {
         "interval": 3,

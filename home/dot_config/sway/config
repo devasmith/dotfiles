@@ -236,7 +236,7 @@ for_window [app_id="clipse"] floating enable, move position center, resize set 8
 bindsym $mod+x exec foot --app-id=clipse -e $HOME/go/bin/clipse
 
 # Screenshot
-bindsym Print exec grimshot save area ~/Pictures/Screenshots/$(date +%F-%H%M%S).png
+bindsym Print exec sh -c 'FILE=~/Pictures/Screenshots/$(date +%F-%H%M%S).png; grim -g "$(slurp)" - | tee "$FILE" | wl-copy'
 
 # Set XDG_CURRENT_DESKTOP
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
@@ -250,6 +250,9 @@ exec --no-startup-id blueman-applet
 
 # Networkmanager tray
 exec --no-startup-id nm-applet
+
+# Lxpolkit
+exec --no-startup-id lxpolkit
 
 # auto start applications
 exec --no-startup-id swaymsg 'workspace 1:Firefox; exec firefox'

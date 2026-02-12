@@ -252,12 +252,12 @@ exec --no-startup-id blueman-applet
 exec --no-startup-id nm-applet
 
 # auto start applications
-exec --no-startup-id swaymsg 'workspace 1:Chromium; exec chromium-browser'
+exec --no-startup-id swaymsg 'workspace 1:Firefox; exec firefox'
 exec --no-startup-id swaymsg 'workspace 2:Terminal; exec foot'
 
 # auto assign
 # run `swaymsg -t get_tree` to get info about applications
-assign [app_id="chromium-browser"] 1
+assign [app_id="org.mozilla.firefox"] 1
 assign [app_id="foot"] 2
 
 # Navigate workspaces next / previous with ctrl+arrow right/left

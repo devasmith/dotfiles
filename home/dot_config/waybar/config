@@ -150,7 +150,7 @@
     "clock": {
         "interval": 1,
         "timezone": "Europe/Stockholm",
-        "format": "{:%F %R:%S }",
+        "format": "{:%F %R:%S}",
     },
     "sway/workspaces": {
         "disable-scroll": false,

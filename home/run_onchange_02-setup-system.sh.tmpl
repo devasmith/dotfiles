@@ -56,6 +56,10 @@ EOF
 
 # Enable services
 sudo systemctl enable --now earlyoom
+systemctl --user enable --now clamp-bt-volume.timer
+
+# Disable >100% volume in gnome settings
+gsettings set org.gnome.desktop.sound allow-volume-above-100-percent false
 
 # Only setup AI stack if Ollama is installed
 if ! command -v ollama &>/dev/null; then

@@ -1,0 +1,6 @@
+[Unit]
+Description=Clamp Bluetooth volume to a maximum
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/clamp-bt-volume

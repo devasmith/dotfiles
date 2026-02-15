@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# max volume
+CAP_PCT="${CAP_PCT:-60}"
+
+pactl list short sinks | awk '$2 ~ /^bluez_output/ {print $1}' | while read -r SINK_ID; do
+  CUR_PCT=$(pactl get-sink-volume "$SINK_ID" | awk '
+    match($0, /([0-9]+)%/, a) {print a[1]; exit}
+  ')
+
+  [[ -n "${CUR_PCT:-}" ]] || continue
+
+  if (( CUR_PCT > CAP_PCT )); then
+    pactl set-sink-volume "$SINK_ID" "${CAP_PCT}%"
+  fi
+done
+

@@ -68,10 +68,9 @@ bindsym Control+$mod+l exec --no-startup-id 'swaylock -f -c 000000'
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
-input "type:keyboard" {
+input type:keyboard {
     xkb_layout se
     xkb_variant nodeadkeys
-    xkb_options grp:alt_shift_toggle
 }
 
 ### Key bindings

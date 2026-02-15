@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if ! rpm -q keyd >/dev/null 2>&1; then
+  sudo dnf -y copr enable alternateved/keyd
+  sudo dnf -y install keyd
+fi
+
+KEYD_CFG='[ids]
+*
+
+[main]
+# CapsLock: tap = Escape, hold = Control
+capslock = overload(control, esc)
+
+# Escape: tap = Escape, hold = Alt (Meta)
+esc = overload(alt, esc)
+'
+
+sudo mkdir -p /etc/keyd
+if ! sudo test -f /etc/keyd/default.conf ||
+  ! sudo diff -q <(printf "%s" "$KEYD_CFG") /etc/keyd/default.conf >/dev/null 2>&1; then
+  printf "%s" "$KEYD_CFG" | sudo tee /etc/keyd/default.conf >/dev/null
+  sudo systemctl enable --now keyd
+  sudo systemctl restart keyd
+else
+  sudo systemctl enable --now keyd
+fi

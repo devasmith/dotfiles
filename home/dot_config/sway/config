@@ -250,6 +250,9 @@ exec --no-startup-id nm-applet
 # Lxpolkit
 exec --no-startup-id lxpolkit
 
+# Restart kanshi after Sway is up
+exec_always systemctl --user restart kanshi.service
+
 # auto start applications
 exec --no-startup-id swaymsg 'workspace 1:Firefox; exec firefox'
 exec --no-startup-id swaymsg 'workspace 2:Terminal; exec foot'

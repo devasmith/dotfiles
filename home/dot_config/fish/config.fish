@@ -3,7 +3,6 @@ set fish_greeting ""
 set -gx LC_ALL en_US.UTF-8
 set -gx LC_CTYPE en_US.UTF-8
 set -gx TERM xterm-256color
-set -gx PROTON_PASS_KEY_PROVIDER fs
 set -gx EDITOR nvim
 set -gx VISUAL nvim
 alias vim="nvim"
@@ -13,6 +12,18 @@ alias top="btop"
 
 if status is-interactive
     cd $HOME
+    set -gx ATUIN_NOBIND true
+    atuin init fish | source
+    # remove fish preset for ctrl-r, then bind atuin
+    bind --erase --preset \cr
+    bind --erase --preset -M insert \cr
+
+    bind \cr _atuin_search
+    bind -M insert \cr _atuin_search
+
+    bind -M insert \cr _atuin_search
+    bind -M insert \e\[A _atuin_bind_up
+    bind -M insert \eOA _atuin_bind_up
 end
 
 set -x PATH /usr/local/bin ~/.local/bin ~/go/bin $PATH

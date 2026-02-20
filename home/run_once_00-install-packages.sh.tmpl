@@ -62,6 +62,7 @@ cloud-utils
 genisoimage
 btop
 keepassxc
+snapper
 @virtualization
 
 EOF
@@ -72,6 +73,9 @@ fi
 if command -v go &>/dev/null; then
   if ! command -v clipse &>/dev/null; then
     go install github.com/savedra1/clipse@v1.2.1
+  fi
+  if ! command -v gup &>/dev/null; then
+    go install github.com/nao1215/gup@latest
   fi
 fi
 

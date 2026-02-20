@@ -45,6 +45,12 @@ EOF
   sudo sysctl --system
 fi
 
+# Setup snapper
+if ! sudo test -f /etc/snapper/configs/root; then
+  echo "Initializing snapper..."
+  sudo snapper -c root create-config /
+fi
+
 # Setup logind conf
 sudo mkdir -p /etc/systemd/logind.conf.d
 cat <<EOF | sudo tee /etc/systemd/logind.conf.d/custom.conf

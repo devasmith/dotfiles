@@ -60,22 +60,8 @@ HandleLidSwitchExternalPower=ignore
 HandleLidSwitchDocked=ignore
 EOF
 
-cat <<EOF | sudo tee /etc/systemd/system/battery-threshold.service
-[Unit]
-Description=Set ThinkPad battery charge threshold
-
-[Service]
-Type=oneshot
-ExecStart=/usr/bin/bash -c 'echo 40 > /sys/class/power_supply/BAT0/charge_control_start_threshold'
-ExecStart=/usr/bin/bash -c 'echo 80 > /sys/class/power_supply/BAT0/charge_control_end_threshold'
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
 # Enable services
 sudo systemctl enable --now earlyoom
-sudo systemctl enable --now battery-threshold.service
 systemctl --user enable --now clamp-bt-volume.timer
 systemctl --user enable --now kanshi.service
 

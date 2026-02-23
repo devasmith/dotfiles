@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+systemctl is-active --quiet firewalld || exit 0
+
+sudo firewall-cmd --remove-port=1025-65535/tcp --permanent >/dev/null 2>&1 || true
+sudo firewall-cmd --remove-port=1025-65535/udp --permanent >/dev/null 2>&1 || true
+sudo firewall-cmd --remove-service=ssh --permanent >/dev/null 2>&1 || true
+
+sudo firewall-cmd --reload >/dev/null 2>&1

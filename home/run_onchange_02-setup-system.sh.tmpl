@@ -60,6 +60,11 @@ HandleLidSwitchExternalPower=ignore
 HandleLidSwitchDocked=ignore
 EOF
 
+# Install ClaudeCode
+if [ ! -f "$HOME/.local/bin/claude" ]; then
+  curl -fsSL https://claude.ai/install.sh | bash
+fi
+
 # Enable services
 sudo systemctl enable --now earlyoom
 systemctl --user enable --now clamp-bt-volume.timer

@@ -1,0 +1,72 @@
+set realname  = "`pass mail/work/real_name`"
+set from      = "`pass mail/work/email`"
+set folder    = "imaps://`pass mail/work/imap_host`:`pass mail/work/imap_port`"
+set imap_user = "`pass mail/work/username`"
+set imap_pass = "`pass mail/work/password`"
+
+set spoolfile = "+INBOX"
+set postponed = "+Drafts"
+set record    = "+Sent"
+set trash     = "+Trash"
+
+set imap_keepalive    = 300
+set imap_check_subscribed
+set mail_check        = 300
+set timeout           = 10
+set imap_idle         = yes
+
+set sendmail = "/usr/bin/msmtp -a work"
+set new_mail_command = "[ %n -gt 0 ] && notify-send 'New mail' '%n new messages in %f' || true"
+
+mailboxes +INBOX +Drafts +Sent +Trash +Spam +Archive
+
+set sort              = threads
+set sort_aux          = reverse-last-date-received
+set index_format      = "%4C %Z %{%b %d} %-15.15L (%?l?%4l&%4c?) %s"
+set pager_index_lines = 10
+set pager_context     = 5
+set pager_stop
+set menu_scroll
+set tilde
+unset markers
+
+set date_format = "%Y-%m-%d %H:%M"
+
+set header_cache    = "~/.cache/neomutt/headers"
+set message_cachedir = "~/.cache/neomutt/bodies"
+set certificate_file = "~/.config/neomutt/certificates"
+
+set editor = "$EDITOR"
+set edit_headers
+set fast_reply
+set include
+set forward_format = "Fwd: %s"
+set mime_forward = ask-no
+set confirmappend = no
+
+bind index g         noop
+bind index gg        first-entry
+bind index G         last-entry
+bind index R         group-reply
+bind index <Tab>     sync-mailbox
+bind index <space>   collapse-thread
+
+bind pager g         noop
+bind pager j         next-line
+bind pager k         previous-line
+bind pager gg        top
+bind pager G         bottom
+
+bind index,pager gi  noop
+macro index,pager gi "<change-folder>=INBOX<enter>"    "Gå till INBOX"
+macro index,pager gs "<change-folder>=Sent<enter>"     "Gå till Sent"
+macro index,pager gd "<change-folder>=Drafts<enter>"   "Gå till Drafts"
+macro index,pager gt "<change-folder>=Trash<enter>"    "Gå till Trash"
+macro index,pager ga "<change-folder>=Archive<enter>"  "Gå till Archive"
+
+macro index,pager A  "<save-message>=Archive<enter><sync-mailbox>" "Arkivera"
+
+set crypt_use_gpgme = yes
+set crypt_autosign  = no
+set crypt_replyencrypt = yes
+set pgp_default_key = ""

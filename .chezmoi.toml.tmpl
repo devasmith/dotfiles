@@ -1,0 +1,11 @@
+{{- $hasKey := false -}}
+{{- $gpg := output "gpg" "--list-secret-keys" "--keyid-format" "LONG" -}}
+{{- if $gpg -}}{{- $hasKey = true -}}{{- end -}}
+sourceDir = "{{ .chezmoi.sourceDir }}"
+{{ if $hasKey }}
+[data.mail.work]
+  username  = {{ pass "mail/work/username" | quote }}
+  smtp_host = {{ pass "mail/work/smtp_host" | quote }}
+  smtp_port = {{ pass "mail/work/smtp_port" | quote }}
+  email     = {{ pass "mail/work/email" | quote }}
+{{ end }}

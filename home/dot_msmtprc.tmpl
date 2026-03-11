@@ -1,0 +1,15 @@
+defaults
+  auth           on
+  tls            on
+  tls_trust_file /etc/pki/tls/certs/ca-bundle.crt
+  logfile        ~/.local/share/msmtp/msmtp.log
+
+account work
+  host           {{ .mail.work.smtp_host }}
+  port           {{ .mail.work.smtp_port }}
+  from           {{ .mail.work.email }}
+  user           {{ .mail.work.username }}
+  passwordeval   "pass mail/work/smtp_password"
+  tls_starttls   on
+
+account default : work

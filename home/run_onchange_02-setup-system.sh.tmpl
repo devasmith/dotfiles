@@ -70,5 +70,8 @@ sudo systemctl enable --now earlyoom
 systemctl --user enable --now clamp-bt-volume.timer
 systemctl --user enable --now kanshi.service
 
+# Disable thermald as it is not supporting this processor
+sudo systemctl disable --now thermald
+
 # Disable >100% volume in gnome settings
 gsettings set org.gnome.desktop.sound allow-volume-above-100-percent false

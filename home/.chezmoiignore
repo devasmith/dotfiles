@@ -1,1 +1,2 @@
 .config/chezmoi/chezmoi.toml
+.config/nvim/lazy-lock.json

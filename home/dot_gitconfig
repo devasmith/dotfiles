@@ -92,6 +92,8 @@
   updated = green bold
 [includeIf "gitdir:~/workspace/"]
   path = ~/.git-personal.conf
+[includeIf "gitdir:~/vimwiki/"]
+  path = ~/.git-personal.conf
 [includeIf "gitdir:~/.local/share/chezmoi/"]
   path = ~/.git-personal.conf
 [includeIf "gitdir:~/git/"]

@@ -10,11 +10,22 @@ profile home_1 {
 
 # home 2 monitor
 profile home_2 {
-  output eDP-1 scale 1.75 position 0,312
-  output "Microstep MPG271QX OLED 0x01010101" mode 2560x1440@240Hz position 1462,0
-  output "Dell Inc. DELL P2425 4XKCL14" mode 1920x1200@100Hz position 4022,161
+  output eDP-1 scale 1.75 position 0,247
+  output "Microstep MPG271QX OLED 0x01010101" scale 1.0 mode 2560x1440@240Hz position 1462,0
+  output "Dell Inc. DELL P2425 4XKCL14" scale 1.0 mode 1920x1200@100Hz position 4022,0
 
   exec $HOME/.config/kanshi/move-workspaces.sh "MPG271QX" "1 2 3" 1
+}
+
+profile work_lg5k {
+  output eDP-1 scale 1.5 mode 2560x1600@90Hz position 879,1440
+  output DP-1 scale 1.5 mode 2560x2160@59.978Hz position 0,0
+  output DP-2 scale 1.5 mode 2560x2160@59.978Hz position 1706,0
+}
+
+profile work_lg5k_single {
+  output eDP-1 scale 1.5 mode 2560x1600@90Hz scale 1.5 position 1004,1440
+  output "LG Electronics LG HDR 5K 403NTYTFB242" scale 1.5 mode 5120x2160 position 0,0
 }
 
 # laptop

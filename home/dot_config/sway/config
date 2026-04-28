@@ -16,7 +16,7 @@ set $right l
 # Your preferred terminal emulator
 set $term foot
 # Your preferred application launcher
-set $menu wmenu-run
+set $menu env PATH="$PATH:/var/lib/flatpak/exports/bin:$HOME/.local/share/flatpak/exports/bin" wmenu-run
 # Set font
 font pango:Roboto 11
 # Note: pass the final command to swaymsg so that the resulting window can be opened

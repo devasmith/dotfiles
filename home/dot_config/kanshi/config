@@ -29,12 +29,13 @@ profile work_lg5k_single {
 }
 
 profile mirror-hdmi {
-    output eDP-1 scale 1.5 mode 2560x1600@90Hz position 0,0
-    output HDMI-A-1 enable mode 3840x2160@60Hz position 2560,0
-    exec ~/.config/kanshi/mirror-hdmi.sh
+  output eDP-1 scale 1.5 mode 2560x1600@90Hz position 0,0
+  output HDMI-A-1 enable mode 3840x2160@60Hz position 2560,0
+  exec ~/.config/kanshi/mirror-hdmi.sh
 }
 
 # laptop
 profile laptop {
-	output eDP-1 scale 1.75
+  output eDP-1 scale 1.5
+  exec pkill wl-mirror
 }

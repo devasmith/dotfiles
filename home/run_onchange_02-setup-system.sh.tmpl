@@ -56,8 +56,8 @@ sudo mkdir -p /etc/systemd/logind.conf.d
 cat <<EOF | sudo tee /etc/systemd/logind.conf.d/custom.conf
 [Login]
 HandleLidSwitch=suspend
-HandleLidSwitchExternalPower=ignore
-HandleLidSwitchDocked=ignore
+HandleLidSwitchExternalPower=suspend
+HandleLidSwitchDocked=suspend
 EOF
 
 # Install ClaudeCode

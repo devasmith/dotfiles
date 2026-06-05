@@ -24,8 +24,8 @@ profile work_lg5k {
 }
 
 profile work_lg5k_single {
-  output eDP-1 scale 1.5 mode 2560x1600@90Hz scale 1.5 position 1004,1440
-  output "LG Electronics LG HDR 5K 403NTYTFB242" scale 1.5 mode 5120x2160 position 0,0
+  output eDP-1 scale 1.5 mode 2560x1600@90Hz scale 1.5 position 0,436
+  output "LG Electronics LG HDR 5K *" scale 1.5 mode 5120x2160 position 1706,260
 }
 
 profile mirror-hdmi {

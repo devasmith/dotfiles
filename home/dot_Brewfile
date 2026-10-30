@@ -1,0 +1,35 @@
+# macOS packages, installed by run_onchange_00-darwin-install-packages.sh.tmpl.
+# Linux (dnf) equivalents live in run_once_00-install-packages.sh.tmpl.
+
+# CLI
+brew "atuin"
+brew "bash-language-server"
+brew "btop"
+brew "direnv"
+brew "fd"
+brew "fish"
+brew "fzf"
+brew "git"
+brew "git-delta"
+brew "gitleaks"
+brew "go"
+brew "ipcalc"
+brew "jq"
+brew "k9s"
+brew "kind"
+brew "ncdu"
+brew "neovim"
+brew "podman"
+brew "shellcheck"
+brew "shfmt"
+brew "tmux"
+brew "yq"
+
+# Apps
+cask "alfred"
+cask "firefox"
+cask "ghostty"
+cask "visual-studio-code"
+
+# Fonts
+cask "font-jetbrains-mono-nerd-font"

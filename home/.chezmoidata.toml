@@ -1,0 +1,12 @@
+# Proton Pass share and item IDs for SSH, one key per OS
+[ssh.config]
+  share = "OmCo9V7LrkI530SW9_mw0-qzbaKRajYYvXAV8J7TTKdpqtDzfplgKT7aeYRnqoeg319sGwXQsbiUUitebltoeg=="
+  item = "eR9kH1eON0L6nU0OB4ehKb6OjTBj6-HAx2yzXlRqeUs8v6GYRsgX1XrSmkMk8fCD9nx5d0b1LNq3goAHcUu03Q=="
+
+[ssh.key.linux]
+  share = "OmCo9V7LrkI530SW9_mw0-qzbaKRajYYvXAV8J7TTKdpqtDzfplgKT7aeYRnqoeg319sGwXQsbiUUitebltoeg=="
+  item = "qc0T7SjSIreh6fEUyyZ0KBo7benoOaRSwbrare8ErN8SIO9o88QH7v6fdYx-L0zGAmqEOn_lEPYz3GHlLC7v_Q=="
+
+[ssh.key.darwin]
+  share = "pw6XY-_dWMRNcAk0ZuUN_SksZ9HM4PA8g2oB2mhI2CnufgtkF4B6vTLRkpIQVkIkVMZNeBcOpfXUimfGRNXwYg=="
+  item = "Fv3g8gQ2AekADMXPbhbWHLoqX9TmcfVhcj7X5G8217exW6VQE1D17J6tx4AskPO4dBFyx_jYAJPWl5w4tGhqoQ=="

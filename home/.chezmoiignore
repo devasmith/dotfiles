@@ -1,2 +1,45 @@
 .config/chezmoi/chezmoi.toml
 .config/nvim/lazy-lock.json
+
+{{ if ne .chezmoi.os "linux" }}
+# Sway/Wayland desktop
+.bliss-tux.jpeg
+.config/environment.d
+.config/foot
+.config/kanshi
+.config/mako
+.config/pipewire
+.config/rofi
+.config/sway
+.config/systemd
+.config/waybar
+.config/xdg-desktop-portal
+.local/bin/clamp-bt-volume
+
+# Fish: sysfs battery, dnf/snapper, libvirt
+.config/fish/completions/virshvm.fish
+.config/fish/functions/bat-full.fish
+.config/fish/functions/safe-up.fish
+.config/fish/functions/vdom.fish
+.config/fish/functions/vip.fish
+.config/fish/functions/vms.fish
+.config/fish/functions/vpick.fish
+.config/fish/functions/vreboot.fish
+.config/fish/functions/vssh.fish
+.config/fish/functions/vup.fish
+
+# Scripts (dnf, systemd, keyd, firewalld, ...)
+00-install-packages.sh
+01-setup-sudoers.sh
+02-setup-system.sh
+03-blacklist-spd5118.sh
+03-keyd.sh
+04-firewalld-hardening.sh
+{{ end }}
+
+{{ if ne .chezmoi.os "darwin" }}
+.Brewfile
+.config/fish/conf.d/homebrew.fish
+.config/ghostty
+*-darwin-*.sh
+{{ end }}

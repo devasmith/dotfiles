@@ -3,4 +3,4 @@ theme = Dracula
 font-size = 13
 
 # Option sends Alt, for fish bindings like Alt+.
-macos-option-as-alt = true
+macos-option-as-alt = left

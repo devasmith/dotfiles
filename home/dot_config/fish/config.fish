@@ -38,6 +38,7 @@ end
 
 direnv hook fish | source
 
+# plugin-git's gup (git pull --rebase) shadows the gup binary
 functions -e gup
 abbr -e gup
 abbr -a vm vms

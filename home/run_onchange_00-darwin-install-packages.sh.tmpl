@@ -26,20 +26,6 @@ mkdir -p "$HOME/.local/bin"
 rm -f "$HOME/.local/bin/pass-cli"
 
 # Go packages
-if ! command -v gup &>/dev/null; then
+if [[ ! -x "$(go env GOPATH)/bin/gup" ]]; then
   go install github.com/nao1215/gup@latest
 fi
-
-# Fish shell
-fish="$(brew --prefix)/bin/fish"
-
-if [[ ! -f "$HOME/.config/fish/functions/fisher.fish" ]]; then
-  mkdir -p "$HOME/.config/fish/functions/"
-  curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish -o "$HOME/.config/fish/functions/fisher.fish"
-fi
-
-fisher_packages=("jethrokuan/z" "IlanCosman/tide@v6" "jethrokuan/fzf" "jhillyerd/plugin-git")
-
-for package in "${fisher_packages[@]}"; do
-  "$fish" -c "fisher install $package"
-done

@@ -36,14 +36,18 @@ chezmoi apply
 ## OS-specific files
 `home/.chezmoiignore` selects files and scripts per OS.
 
+### Both
+- `run_onchange_after_05-fisher.sh.tmpl` installs fisher and syncs fish plugins to
+  `~/.config/fish/fish_plugins` with `fisher update`, so plugins removed from the list are uninstalled
+
 ### Fedora
-- `run_once_00-install-packages.sh.tmpl` installs packages with dnf, Go tools and fisher plugins
+- `run_once_00-install-packages.sh.tmpl` installs packages with dnf and Go tools
 - the other `run_*` scripts set up sudoers, system settings, keyd and firewalld
 
 ### macOS
 - `run_onchange_00-darwin-install-packages.sh.tmpl` installs Homebrew if missing and runs `brew bundle` on
-  `~/.Brewfile`, then Go tools and fisher plugins. It also removes the bootstrap pass-cli in favour of
-  Homebrew's, so update it with `brew upgrade`
+  `~/.Brewfile`, then Go tools. It also removes the bootstrap pass-cli in favour of Homebrew's, so update
+  it with `brew upgrade`
 - `run_onchange_01-darwin-setup-system.sh` makes fish the login shell and enables the application firewall
 - `run_onchange_02-darwin-defaults.sh` sets system preferences with `defaults`; log out to apply the keyboard
   settings

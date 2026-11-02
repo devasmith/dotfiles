@@ -1,0 +1,25 @@
+#!/bin/bash
+set -euo pipefail
+
+# Re-run when the plugin list changes
+# fish_plugins hash: {{ include "dot_config/fish/fish_plugins" | sha256sum }}
+
+{{ if eq .chezmoi.os "darwin" -}}
+{{   if eq .chezmoi.arch "arm64" -}}
+fish=/opt/homebrew/bin/fish
+{{   else -}}
+fish=/usr/local/bin/fish
+{{   end -}}
+{{ else -}}
+fish=/usr/bin/fish
+{{ end }}
+# Fisher refuses to install itself over a fisher.fish it didn't install, so drop a
+# hand-downloaded copy and bootstrap from curl until fisher manages itself
+# shellcheck disable=SC2016
+if ! "$fish" -c 'contains jorgebucaran/fisher $_fisher_plugins'; then
+  rm -f "$HOME/.config/fish/functions/fisher.fish"
+fi
+
+# Install, update and remove plugins to match ~/.config/fish/fish_plugins
+# shellcheck disable=SC2016
+"$fish" -c 'type -q fisher; or curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source; and fisher update'

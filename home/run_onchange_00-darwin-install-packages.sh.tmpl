@@ -22,6 +22,9 @@ brew bundle --file={{ joinPath .chezmoi.sourceDir "dot_Brewfile" | quote }}
 
 mkdir -p "$HOME/.local/bin"
 
+# Remove the bootstrap pass-cli so Homebrew's are used
+rm -f "$HOME/.local/bin/pass-cli"
+
 # Go packages
 if ! command -v gup &>/dev/null; then
   go install github.com/nao1215/gup@latest

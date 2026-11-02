@@ -20,6 +20,7 @@ brew "kind"
 brew "ncdu"
 brew "neovim"
 brew "podman"
+brew "proton-pass-cli"
 brew "shellcheck"
 brew "shfmt"
 brew "tmux"
@@ -27,8 +28,10 @@ brew "yq"
 
 # Apps
 cask "alfred"
+cask "claude-code"
 cask "firefox"
 cask "ghostty"
+cask "signal"
 cask "visual-studio-code"
 
 # Fonts

@@ -21,8 +21,3 @@ fi
 # Application firewall: on, stealth mode (counterpart to firewalld hardening)
 sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
 sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setstealthmode on
-
-# Install ClaudeCode
-if [ ! -f "$HOME/.local/bin/claude" ]; then
-  curl -fsSL https://claude.ai/install.sh | bash
-fi

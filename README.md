@@ -42,7 +42,8 @@ chezmoi apply
 
 ### macOS
 - `run_onchange_00-darwin-install-packages.sh.tmpl` installs Homebrew if missing and runs `brew bundle` on
-  `~/.Brewfile`, then Go tools and fisher plugins
+  `~/.Brewfile`, then Go tools and fisher plugins. It also removes the bootstrap pass-cli in favour of
+  Homebrew's, so update it with `brew upgrade`
 - `run_onchange_01-darwin-setup-system.sh` makes fish the login shell and enables the application firewall
 - `run_onchange_02-darwin-defaults.sh` sets system preferences with `defaults`; log out to apply the keyboard
   settings

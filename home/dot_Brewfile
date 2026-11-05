@@ -29,9 +29,11 @@ brew "yq"
 # Apps
 cask "alfred"
 cask "claude-code"
+cask "discord"
 cask "firefox"
 cask "ghostty"
 cask "signal"
+cask "stats"
 cask "visual-studio-code"
 
 # Fonts

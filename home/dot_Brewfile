@@ -32,9 +32,13 @@ cask "claude-code"
 cask "discord"
 cask "firefox"
 cask "ghostty"
+cask "proton-drive"
+cask "proton-mail"
 cask "signal"
 cask "stats"
+cask "tailscale-app"
 cask "visual-studio-code"
+cask "winbox"
 
 # Fonts
 cask "font-jetbrains-mono-nerd-font"

@@ -26,6 +26,10 @@ defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
 defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
 # --- Finder ---
+# Quit Finder first: a running Finder writes its old view settings back
+# to prefs and .DS_Store files when it exits
+osascript -e 'tell application "Finder" to quit' 2>/dev/null || true
+sleep 2
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 defaults write com.apple.finder AppleShowAllFiles -bool true
 defaults write com.apple.finder ShowPathbar -bool true
@@ -33,8 +37,15 @@ defaults write com.apple.finder ShowStatusBar -bool true
 defaults write com.apple.finder _FXSortFoldersFirst -bool true
 # List view, search current folder, no warning on extension change
 defaults write com.apple.finder FXPreferredViewStyle -string Nlsv
+# Search windows (Shift-Cmd-Space) have their own view setting
+defaults write com.apple.finder FXPreferredSearchViewStyle -string Nlsv
 defaults write com.apple.finder FXDefaultSearchScope -string SCcf
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+# Per-folder view settings in .DS_Store override FXPreferredViewStyle;
+# drop them so every folder falls back to list view. Skip ~/Library,
+# except CloudStorage (Proton Drive and other synced folders)
+find "$HOME" -xdev -path "$HOME/Library" -prune -o -name .DS_Store -type f -delete 2>/dev/null || true
+find "$HOME/Library/CloudStorage" -xdev -name .Trash -prune -o -name .DS_Store -type f -delete 2>/dev/null || true
 # No .DS_Store on network and USB volumes
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
@@ -61,3 +72,5 @@ defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 for app in Finder Dock SystemUIServer; do
   killall "$app" &>/dev/null || true
 done
+# Finder was quit above, so start it again
+open -a Finder
